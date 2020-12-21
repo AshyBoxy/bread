@@ -1,4 +1,4 @@
-import { Client, ClientEvents, ClientOptions, Collection } from "discord.js";
+import { Client, ClientEvents, Collection } from "discord.js";
 import { readdirSync } from "fs";
 import * as path from "path";
 import ICoins from "../Interfaces/Coins";
@@ -11,7 +11,6 @@ import Command from "./Command";
 import EventHandler from "./EventHandler";
 import LevelDB from "./LevelDB";
 // import Web from "./Web";
-
 
 class CustomClient extends Client {
     config: IConfig;
@@ -27,9 +26,9 @@ class CustomClient extends Client {
     // web = new Web(this);
 
     constructor(
-        options: ClientOptions, config: IConfig, modules: IModule[], guildConfigs: LevelDB<IGuildConfig>, coins: LevelDB<ICoins>
+        config: IConfig, modules: IModule[], guildConfigs: LevelDB<IGuildConfig>, coins: LevelDB<ICoins>
     ) {
-        super(options);
+        super(config);
         this.config = config;
         this.modules = modules;
         this.guildConfigs = guildConfigs;

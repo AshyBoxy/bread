@@ -1,8 +1,3 @@
-/**
- * entry file
- * @packageDocumentation
- */
-
 import * as path from "path";
 import Client from "./Classes/Client";
 import LevelDB from "./Classes/LevelDB";
@@ -12,21 +7,9 @@ import STRINGS from "./strings";
 
 const dbBasePath = `${path.join(__dirname, "..", "data")}`;
 
-const bot = new Client({
-    "partials": [
-        "REACTION",
-        "MESSAGE"
-    ],
-    "ws": {
-        "intents": [
-            "GUILDS",
-            "GUILD_MESSAGES",
-            "GUILD_MESSAGE_REACTIONS"
-            // "GUILD_MEMBERS", // priviledged
-            // "GUILD_PRESENCES" // priviledged
-        ]
-    }
-}, config, modules,
+const bot = new Client(
+    config,
+    modules,
     new LevelDB(path.join(dbBasePath, "guildConfigs.db")),
     new LevelDB(path.join(dbBasePath, "coins.db"))
 );

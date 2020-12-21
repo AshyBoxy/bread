@@ -2,7 +2,7 @@ import { Guild, GuildMember, User } from "discord.js";
 import Client from "../Classes/Client";
 
 function memberFromMention(guild: Guild | null, arg: string): GuildMember | null {
-    const id = getMention(arg);
+    const id = idFromMention(arg);
     if (!id || !guild) return null;
     const member = guild.members.cache.get(id);
     if (!member) return null;
@@ -10,14 +10,14 @@ function memberFromMention(guild: Guild | null, arg: string): GuildMember | null
 }
 
 function userFromMention(bot: Client, arg: string): User | null {
-    const id = getMention(arg);
+    const id = idFromMention(arg);
     if (!id) return null;
     const user = bot.users.cache.get(id);
     if (!user) return null;
     return user;
 }
 
-function getMention(arg: string): string | null {
+function idFromMention(arg: string): string | null {
     if (!arg) return null;
     const mentions = arg.match(/^<@!?(\d+)>$/);
     if (!mentions) return null;
@@ -25,4 +25,4 @@ function getMention(arg: string): string | null {
     return id;
 }
 
-export { memberFromMention, userFromMention };
+export { memberFromMention, userFromMention, idFromMention };

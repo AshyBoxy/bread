@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const e = require("express");
 const a = e();
 

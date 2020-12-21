@@ -77,10 +77,17 @@ const _STRINGS: IStrings = {
                 },
                 JOINED: "Joined Server At"
             }
+        },
+        MOD: {
+            CLEAR: {
+                DATA: {
+                    NAME: "Clear",
+                    INFO: "Clears messages",
+                    USAGE: "clear <amount of messages to clear (maximum of 50)>"
+                },
+                DELETED_MESSAGES: (deletedCount): string => `Deleted ${deletedCount} messages!`
+            }
         }
-    },
-    WEB: {
-        ONLINE: "Web dashboard online"
     }
 };
 

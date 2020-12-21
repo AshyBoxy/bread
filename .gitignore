@@ -1,4 +1,5 @@
 node_modules
 dist
 data/*
+!data/include
 src/config.ts

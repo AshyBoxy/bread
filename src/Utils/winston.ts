@@ -13,7 +13,7 @@ const consoleSettings: transports.ConsoleTransportOptions = {
     "format": format.combine(
         format.colorize(),
         format.timestamp({
-            "format": "ddd MMM DD YYYY HH:mm:ss ZZ"
+            "format": "ddd MMM DD YY HH:mm:ss ZZ"
         }),
         format.printf(({ level, message, timestamp, ...rest }) => `${timestamp} - ${level}: ${message} (${JSON.stringify(rest)})`)
     )
@@ -23,7 +23,7 @@ const webhookSettings: Transport.TransportStreamOptions = {
     "level": "silly",
     "format": format.combine(
         format.timestamp({
-            "format": "ddd MMM DD YYYY HH:mm:ss ZZ"
+            "format": "ddd MMM DD YY HH:mm:ss ZZ"
         })
     )
 };

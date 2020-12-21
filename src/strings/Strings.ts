@@ -74,10 +74,16 @@ export interface COMMANDS {
             JOINED: string;
         };
     };
-}
-
-export interface WEB {
-    ONLINE: string;
+    MOD: {
+        CLEAR: {
+            DATA: {
+                NAME: string;
+                USAGE: string;
+                INFO: string;
+            };
+            DELETED_MESSAGES: (deletedCount: number) => string;
+        };
+    };
 }
 
 export interface IStrings {
@@ -86,7 +92,6 @@ export interface IStrings {
     MAIN: MAIN;
     EVENTS: EVENTS;
     COMMANDS: COMMANDS;
-    WEB: WEB;
 }
 
 export default IStrings;

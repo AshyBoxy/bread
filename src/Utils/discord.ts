@@ -10,7 +10,7 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
     if (command.dmOnly && msg.channel.type !== "dm") return msg.channel.send(STRINGS.UTILS.DISCORD.DM_ONLY);
     if (command.permission) if (msg.channel.type !== "dm") if (!checkPermission(command.permission, msg.member as GuildMember)) return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_PERMISSIONS);
 
-    const cmdRun = await command.run(bot, msg, args);
+    const cmdRun = await (command.run(bot, msg, args) as unknown as Promise<number | void>)?.catch?.(() => 2);
 
     if (cmdRun === RETURN_CODES.BAD_USAGE)
         return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_USAGE(bot.config.prefix, command.usage));

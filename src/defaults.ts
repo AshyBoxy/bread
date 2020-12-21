@@ -1,4 +1,3 @@
-
 import { DEFAULTS } from "./constants";
 import ICoins from "./Interfaces/Coins";
 

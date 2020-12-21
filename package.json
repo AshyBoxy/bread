@@ -4,9 +4,10 @@
   "description": "Discord Bot",
   "main": "dist/index.js",
   "scripts": {
-    "start": "rm -r dist/ ; tsc ; node dist/index.js",
-    "build": "tsc",
-    "nobuild": "node dist/index.js"
+    "start": "npm run build ; npm run nobuild",
+    "build": "rm -r dist/ ; tsc",
+    "nobuild": "node dist/index.js",
+    "test": "node test.js"
   },
   "keywords": [],
   "author": "AshyBoxy",

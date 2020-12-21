@@ -1,4 +1,5 @@
-import { AllowedImageFormat, ImageSize, RoleData } from "discord.js";
+import { AllowedImageFormat, ImageSize, PresenceData, RoleData } from "discord.js";
+import STRINGS from "./strings";
 
 // command return codes
 export const RETURN_CODES = {
@@ -9,6 +10,14 @@ export const RETURN_CODES = {
 
 // embed color seems to come up a lot
 export const globalEmbedColor = 0xff00ff;
+
+export const PRESENCE: PresenceData = {
+    "activity": {
+        name: STRINGS.EVENTS.READY.ACTIVITY_NAME,
+        type: "WATCHING"
+    },
+    "status": "idle"
+};
 
 // commands
 export namespace COMMANDS {
@@ -40,6 +49,11 @@ export namespace COMMANDS {
                 mentionable: false,
                 position: 0
             };
+        }
+
+        export namespace CLEAR {
+            export const maximumMessages = 50;
+            export const filterOld = true;
         }
     }
 
@@ -119,9 +133,3 @@ export namespace DEFAULTS {
         export const hourlyCooldown = 0;
     }
 }
-
-// web
-export const WEB = {
-    PORT: 8001,
-    INTERFACE: "0.0.0.0"
-};
