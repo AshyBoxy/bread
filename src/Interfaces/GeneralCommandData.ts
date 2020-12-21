@@ -1,0 +1,9 @@
+import { PermissionResolvable } from "discord.js";
+import ICommandData from "./CommandData";
+
+export default interface IGeneralCommandData extends ICommandData {
+    guildOnly?: boolean;
+    dmOnly?: boolean;
+
+    permission?: PermissionResolvable;
+}
