@@ -10,7 +10,6 @@ import { logger } from "../Utils";
 import Command from "./Command";
 import EventHandler from "./EventHandler";
 import LevelDB from "./LevelDB";
-// import Web from "./Web";
 
 class CustomClient extends Client {
     config: IConfig;
@@ -22,8 +21,6 @@ class CustomClient extends Client {
     coins: LevelDB<ICoins>;
 
     logger = logger;
-
-    // web = new Web(this);
 
     constructor(
         config: IConfig, modules: IModule[], guildConfigs: LevelDB<IGuildConfig>, coins: LevelDB<ICoins>
@@ -37,7 +34,7 @@ class CustomClient extends Client {
         const warnings: string[] = [];
         const infos: string[] = [];
 
-        // load events
+
         const events: string[] = [];
         const eventFiles = readdirSync(this.config.eventsPath).filter((x: string) => x.endsWith(".js"));
 
@@ -48,7 +45,7 @@ class CustomClient extends Client {
         }
         infos.push(STRINGS.CLASSES.CLIENT.LOADED.EVENTS(events));
 
-        // load commands
+
         const modulesLog: string[] = [];
         for (let i = 0; i < this.modules.length; i++) {
             const cmdFiles = readdirSync(path.join(this.config.commandsPath, this.modules[i].path)).filter((x: string) => x.endsWith(".js"));
@@ -57,7 +54,7 @@ class CustomClient extends Client {
             for (let x = 0; x < cmdFiles.length; x++) {
                 const cmd: Command = require(path.join(this.config.commandsPath, this.modules[i].path, cmdFiles[x]));
                 if (!cmd?.run || !cmd?.name) {
-                    warnings.push(STRINGS.CLASSES.CLIENT.WARNING.COMMAND(cmdFiles[x].split(".js")[0], this.modules[i].name));
+                    warnings.push(STRINGS.CLASSES.CLIENT.WARNINGS.COMMAND(cmdFiles[x].split(".js")[0], this.modules[i].name));
                     continue;
                 }
                 cmd.module = this.modules[i];
@@ -70,9 +67,18 @@ class CustomClient extends Client {
         }
         infos.push(STRINGS.CLASSES.CLIENT.LOADED.MODULES(modulesLog));
 
-        // logs
+
         if (infos.length > 0) this.logger.info(infos.join("\n"));
         if (warnings.length > 0) this.logger.warn(warnings.join("\n"));
+    }
+
+    async shutdown(reason: string): Promise<void> {
+        this.logger.info(STRINGS.MAIN.SHUTTING_DOWN(reason));
+        await Promise.all([
+            this.guildConfigs.db.close(), this.coins.db.close()
+        ]);
+        this.destroy();
+        process.exit();
     }
 }
 

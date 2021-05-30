@@ -5,7 +5,7 @@ import IGuildConfig from "../../Interfaces/GuildConfig";
 
 export = new Command(async (bot, msg, args) => {
     const input = args.join(" ").toLowerCase();
-    const command = bot.commands.get(input) || bot.commands.get(bot.aliases.get(input) as string);
+    const command = bot.commands.get(input) || bot.commands.get(<string>bot.aliases.get(input));
     const module = bot.modules.find((x) => x.name.toLowerCase() === input);
     const embed = new MessageEmbed()
         .setColor(msg.guild?.me?.displayColor || COMMANDS.SPECIAL.HELP.embedColor);

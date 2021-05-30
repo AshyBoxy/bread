@@ -7,7 +7,7 @@ const _STRINGS: IStrings = {
                 EVENTS: (events): string => `loaded events: ${events.join(", ")}`,
                 MODULES: (modules): string => `loaded modules: ${modules.join("; ")}`
             },
-            WARNING: {
+            WARNINGS: {
                 COMMAND: (cmdName, moduleName): string =>
                     `command ${cmdName} in module ${moduleName} has no run function or name`
             }

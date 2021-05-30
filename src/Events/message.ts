@@ -4,6 +4,7 @@ import STRINGS from "../strings";
 import * as utils from "../Utils";
 
 export = new EventHandler("message", (bot) => async (msg): Promise<void> => {
+    utils.react(msg);
     if (msg.author.bot) return;
 
     let guildConfig: IGuildConfig | undefined;
@@ -44,7 +45,7 @@ export = new EventHandler("message", (bot) => async (msg): Promise<void> => {
     let command;
 
     if (bot.commands.get(cmd.slice(prefix.length))) command = bot.commands.get(cmd.slice(prefix.length));
-    else if (bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)) as string)) command = bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)) as string);
+    else if (bot.commands.get(<string>bot.aliases.get(cmd.slice(prefix.length)))) command = bot.commands.get(<string>bot.aliases.get(cmd.slice(prefix.length)));
 
     if (command) utils.discord.runCommand(bot, msg, args, command);
 });

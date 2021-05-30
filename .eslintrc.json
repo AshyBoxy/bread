@@ -38,7 +38,6 @@
         "no-lone-blocks": "error",
         "require-await": "error",
         "yoda": "error",
-        "no-shadow": "error",
         "array-bracket-newline": [
             "error",
             {
@@ -93,6 +92,17 @@
             }
         ],
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": [
+            "error"
+        ],
+        "@typescript-eslint/consistent-type-assertions": [
+            "error",
+            {
+                "assertionStyle": "angle-bracket",
+                "objectLiteralTypeAssertions": "never"
+            }
+        ]
     }
 }

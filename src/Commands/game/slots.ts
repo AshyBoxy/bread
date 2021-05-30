@@ -33,7 +33,7 @@ export = new Command(async (bot, msg, args) => {
     // nick
     if (msg.author.id === "577483620244258825") winRate = 1;
 
-    let win = Math.random() < winRate;
+    const win = Math.random() < winRate;
 
     let message: string;
 

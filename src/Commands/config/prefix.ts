@@ -9,7 +9,7 @@ export = new Command(async (bot, msg, args) => {
     if (!guildConfig) return RETURN_CODES.ERROR;
 
     if (args[0].length > COMMANDS.CONFIG.PREFIX.maxLength)
-        return msg.channel.send(STRINGS.COMMANDS.CONFIG.PREFIX.TOO_LONG)
+        return msg.channel.send(STRINGS.COMMANDS.CONFIG.PREFIX.TOO_LONG(COMMANDS.CONFIG.PREFIX.maxLength))
             , RETURN_CODES.OK;
     guildConfig.prefix = args[0].toLowerCase();
 

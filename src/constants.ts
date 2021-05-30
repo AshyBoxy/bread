@@ -25,7 +25,7 @@ export namespace COMMANDS {
     export namespace CONFIG {
         // prefix command
         export namespace PREFIX {
-            export const maxLength = 10;
+            export const maxLength = 100;
         }
     }
 

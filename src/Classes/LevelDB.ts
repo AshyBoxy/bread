@@ -1,11 +1,12 @@
 import levelup, { LevelUp } from "levelup";
-import leveldown from "leveldown";
+import * as leveldown from "leveldown";
 
 class LevelDB<valueType>{
-    db: LevelUp = undefined as never;
+    db: LevelUp = <never>undefined;
 
     constructor(path?: string) {
         if (!path) return;
+        // @ts-expect-error typings are outdated
         this.db = levelup(leveldown(path));
     }
 

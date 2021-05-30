@@ -4,7 +4,7 @@ export interface CLASSES {
             EVENTS: (events: string[]) => string;
             MODULES: (modules: string[]) => string;
         };
-        WARNING: {
+        WARNINGS: {
             COMMAND: (commandName: string, modulename: string) => string;
         };
     };
@@ -46,7 +46,7 @@ export interface COMMANDS {
                 USAGE: string;
                 INFO: string;
             };
-            TOO_LONG: (maxLength: string) => string;
+            TOO_LONG: (maxLength: number) => string;
         };
     };
     FUN: {

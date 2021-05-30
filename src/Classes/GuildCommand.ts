@@ -9,7 +9,7 @@ class GuildCommand extends Command {
     constructor(execute: (bot: Client, message: IGuildMessage, args: string[]) => number | void | Promise<number | void>, data: IGuildCommandData) {
         const commandData: IGeneralCommandData = data;
         commandData.guildOnly = true;
-        super(execute as (bot: Client, message: Message, args: string[]) => number | void | Promise<number | void>, commandData);
+        super(<(bot: Client, message: Message, args: string[]) => number | void | Promise<number | void>>execute, commandData);
     }
 }
 

@@ -7,7 +7,7 @@ type Execute<EventName extends Events> = (bot: CustomClient) => (...args: Client
 class EventHandler<EventName extends Events> {
     execute: Execute<EventName>;
 
-    name: keyof ClientEvents;
+    name: EventName;
 
     constructor(name: EventName, execute: Execute<EventName>) {
         this.execute = execute;

@@ -16,14 +16,5 @@ const bot = new Client(
 
 bot.login(bot.config.token);
 
-// clean exit
-const shutdown = async (reason: string): Promise<void> => {
-    bot.logger.info(STRINGS.MAIN.SHUTTING_DOWN(reason));
-    await Promise.all([
-        bot.guildConfigs.db.close(), bot.coins.db.close()
-    ]);
-    bot.destroy();
-    process.exit();
-};
-process.on("SIGINT", () => shutdown(STRINGS.MAIN.SIGINT));
-process.on("SIGTERM", () => shutdown(STRINGS.MAIN.SIGTERM));
+process.on("SIGINT", () => bot.shutdown(STRINGS.MAIN.SIGINT));
+process.on("SIGTERM", () => bot.shutdown(STRINGS.MAIN.SIGTERM));
