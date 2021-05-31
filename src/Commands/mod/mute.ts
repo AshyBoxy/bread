@@ -29,5 +29,6 @@ export = new GuildCommand(async (bot, msg, args) => {
     "info": "Mutes the specified user",
     "usage": "mute <@user> [time in minutes] [reason]",
     "permission": ["MANAGE_ROLES"],
-    "botPermission": ["MANAGE_ROLES"]
+    "botPermission": ["MANAGE_ROLES"],
+    "aliases": ["m"]
 });
