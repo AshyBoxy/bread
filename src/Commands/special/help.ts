@@ -3,7 +3,7 @@ import Command from "../../Classes/Command";
 import { COMMANDS } from "../../constants";
 import IGuildConfig from "../../Interfaces/GuildConfig";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const input = args.join(" ").toLowerCase();
     const command = bot.commands.get(input) || bot.commands.get(<string>bot.aliases.get(input));
     const module = bot.modules.find((x) => x.name.toLowerCase() === input);
@@ -35,10 +35,10 @@ export = new Command(async (bot, msg, args) => {
         for (const modulei of bot.modules) embed.addField(modulei.name, modulei.description, true);
     } else embed.setTitle(`Command or Module "${args[0]}" could not be found!`);
 
-    msg.channel.send(embed);
+    msg.channel.send({ embeds: [embed] });
 }, {
-    "name": "Help",
-    "info": "Shows help",
-    "usage": "help [module|command]",
-    "aliases": ["h"]
+    name: "Help",
+    info: "Shows help",
+    usage: "help [module|command]",
+    aliases: ["h"]
 });

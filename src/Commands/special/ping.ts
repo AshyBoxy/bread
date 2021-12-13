@@ -1,20 +1,24 @@
-import { Client, Message } from "discord.js";
-import { RETURN_CODES } from "../../constants";
+import Command from "../../Classes/Command.js";
 
-exports.run = (bot: Client, msg: Message): number => {
+export default new Command((bot, msg) => {
     msg.channel.send(`Pong! ${Math.floor(bot.ws.ping)}ms`);
-    return RETURN_CODES.OK;
-};
+    return 0;
+}, {
+    name: "Ping",
+    info: "Displays websocket ping",
+    usage: "ping",
+    aliases: [
+        "p",
+        "pong"
+    ],
 
-exports.name = "Ping";
-exports.info = "Displays websocket ping";
-exports.usage = "ping";
-exports.aliases = [
-    "p",
-    "pong"
-];
+    disabled: false,
+    guildOnly: false,
+    dmOnly: false,
+    permission: [],
 
-exports.disabled = false;
-exports.guildOnly = false;
-exports.dmOnly = false;
-exports.permission = [];
+    interactionOnly: false,
+    messageOnly: false,
+
+    args: {}
+});

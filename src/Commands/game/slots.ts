@@ -3,7 +3,7 @@ import { COMMANDS, RETURN_CODES } from "../../constants";
 import { getCoins } from "../../defaults";
 import randomNumber from "../../Utils/randomNumber";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const user = msg.author;
     let coins = await bot.coins.get(user.id);
     if (!coins) coins = getCoins(user.id);
@@ -55,7 +55,7 @@ export = new Command(async (bot, msg, args) => {
     msg.channel.send(message);
     return RETURN_CODES.OK;
 }, {
-    "name": "Slots",
-    "usage": "slots <amount>",
-    "info": "Slots"
+    name: "Slots",
+    usage: "slots <amount>",
+    info: "Slots"
 });

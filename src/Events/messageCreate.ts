@@ -3,7 +3,7 @@ import IGuildConfig from "../Interfaces/GuildConfig";
 import STRINGS from "../strings";
 import * as utils from "../Utils";
 
-export = new EventHandler("message", (bot) => async (msg): Promise<void> => {
+export default new EventHandler("messageCreate", (bot) => async (msg): Promise<void> => {
     utils.react(msg);
     if (msg.author.bot) return;
 

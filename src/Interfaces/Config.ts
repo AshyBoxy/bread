@@ -11,6 +11,7 @@ interface ClientConfig {
     };
     eventsPath: string;
     commandsPath: string;
+    dbBasePath: string;
 }
 type IConfig = ClientConfig & ClientOptions;
 

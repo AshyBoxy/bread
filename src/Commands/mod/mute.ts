@@ -1,7 +1,7 @@
 import GuildCommand from "../../Classes/GuildCommand";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 
-export = new GuildCommand(async (bot, msg, args) => {
+export default new GuildCommand(async (bot, msg, args) => {
     const member = msg.mentions.members?.first();
     const num = parseInt(args[1]) || COMMANDS.MOD.MUTE.defaultLength;
     const reason = args.slice(2) === [] ? null : args.slice(2).join(" ");
@@ -25,10 +25,10 @@ export = new GuildCommand(async (bot, msg, args) => {
 
     return RETURN_CODES.OK;
 }, {
-    "name": "Mute",
-    "info": "Mutes the specified user",
-    "usage": "mute <@user> [time in minutes] [reason]",
-    "permission": ["MANAGE_ROLES"],
-    "botPermission": ["MANAGE_ROLES"],
-    "aliases": ["m"]
+    name: "Mute",
+    info: "Mutes the specified user",
+    usage: "mute <@user> [time in minutes] [reason]",
+    permission: ["MANAGE_ROLES"],
+    botPermission: ["MANAGE_ROLES"],
+    aliases: ["m"]
 });

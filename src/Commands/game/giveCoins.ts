@@ -3,7 +3,7 @@ import { COMMANDS, RETURN_CODES } from "../../constants";
 import { mentions } from "../../Utils";
 import { getCoins } from "../../defaults";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const recip = mentions.userFromMention(bot, args[0]);
     const giver = msg.author;
     const amount = parseInt(args[1]);
@@ -33,7 +33,7 @@ export = new Command(async (bot, msg, args) => {
 
     return RETURN_CODES.OK;
 }, {
-    "name": "GiveCoins",
-    "usage": "givecoins <@user> <amount>",
-    "info": "GiveCoins"
+    name: "GiveCoins",
+    usage: "givecoins <@user> <amount>",
+    info: "GiveCoins"
 });

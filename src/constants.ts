@@ -1,22 +1,22 @@
-import { AllowedImageFormat, ImageSize, PresenceData, RoleData } from "discord.js";
+import { AllowedImageFormat, AllowedImageSize, PresenceData, RoleData } from "discord.js";
 import STRINGS from "./strings";
 
 // command return codes
 export const RETURN_CODES = {
-    "OK": 0,
-    "BAD_USAGE": 1,
-    "ERROR": 2
+    OK: 0,
+    BAD_USAGE: 1,
+    ERROR: 2
 };
 
 // embed color seems to come up a lot
 export const globalEmbedColor = 0xff00ff;
 
 export const PRESENCE: PresenceData = {
-    "activity": {
+    activities: [{
         name: STRINGS.EVENTS.READY.ACTIVITY_NAME,
         type: "WATCHING"
-    },
-    "status": "idle"
+    }],
+    status: "idle"
 };
 
 // commands
@@ -43,7 +43,7 @@ export namespace COMMANDS {
             export const mutedRole = MUTE.mutedRole;
             export const mutedData: RoleData = {
                 name: mutedRole,
-                permissions: 0,
+                permissions: 0n,
                 hoist: false,
                 color: 0x4e4949,
                 mentionable: false,
@@ -71,7 +71,7 @@ export namespace COMMANDS {
         export namespace AVATAR {
             export const dynamic = true;
             export const format: AllowedImageFormat = "png";
-            export const size: ImageSize = 2048;
+            export const size: AllowedImageSize = 2048;
             export const embedColor = globalEmbedColor;
         }
 

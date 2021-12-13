@@ -9,10 +9,10 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
         return msg.channel.send(STRINGS.UTILS.DISCORD.DISABLED);
     if (command.guildOnly && !msg.guild)
         return msg.channel.send(STRINGS.UTILS.DISCORD.GUILD_ONLY);
-    if (command.dmOnly && msg.channel.type !== "dm")
+    if (command.dmOnly && msg.channel.type !== "DM")
         return msg.channel.send(STRINGS.UTILS.DISCORD.DM_ONLY);
     if (
-        command.permission && msg.channel.type !== "dm" &&
+        command.permission && msg.channel.type !== "DM" &&
         !checkPermission(command.permission, <GuildMember>msg.member)
     ) return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_PERMISSIONS);
 
@@ -31,7 +31,7 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
 function checkPermission(permission: PermissionResolvable, member: GuildMember): boolean {
     if (!permission || !member) return false;
 
-    const hasPerm = member.hasPermission(permission);
+    const hasPerm = member.permissions.has(permission);
 
     return hasPerm;
 }

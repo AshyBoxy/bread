@@ -2,7 +2,7 @@ import Command from "../../Classes/Command";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 import { getCoins } from "../../defaults";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const amount = parseInt(args[0]);
     if (!amount) return RETURN_CODES.BAD_USAGE;
 
@@ -21,8 +21,8 @@ export = new Command(async (bot, msg, args) => {
 
     return RETURN_CODES.OK;
 }, {
-    "name": "ThrowCoins",
-    "usage": "throwcoins <amount>",
-    "info": "ThrowCoins",
-    "aliases": ["yeetcoins"]
+    name: "ThrowCoins",
+    usage: "throwcoins <amount>",
+    info: "ThrowCoins",
+    aliases: ["yeetcoins"]
 });

@@ -92,7 +92,7 @@ const _STRINGS: IStrings = {
 };
 
 const strings = {
-    "STRINGS": _STRINGS
+    STRINGS: _STRINGS
 };
 const selectedName = "STRINGS";
 const STRINGS = strings[selectedName];

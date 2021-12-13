@@ -5,14 +5,14 @@ import modules from "./Commands/modules";
 import config from "./config";
 import STRINGS from "./strings";
 
-const dbBasePath = `${path.join(__dirname, "..", "data")}`;
-
 const bot = new Client(
     config,
     modules,
-    new LevelDB(path.join(dbBasePath, "guildConfigs.db")),
-    new LevelDB(path.join(dbBasePath, "coins.db"))
+    new LevelDB(path.join(config.dbBasePath, "guildConfigs.db")),
+    new LevelDB(path.join(config.dbBasePath, "coins.db"))
 );
+
+await bot.setup();
 
 bot.login(bot.config.token);
 

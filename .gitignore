@@ -3,3 +3,4 @@ dist
 data/*
 src/config.ts
 !**/.gitinclude
+test.js

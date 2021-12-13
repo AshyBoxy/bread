@@ -2,7 +2,7 @@ import Command from "../../Classes/Command";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 import { getCoins } from "../../defaults";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const user = msg.author;
 
     let coins = await bot.coins.get(user.id);
@@ -32,9 +32,9 @@ export = new Command(async (bot, msg, args) => {
     let winRate = COMMANDS.GAME.GAMBLE.winRate;
 
     // nord
-    if (msg.author.id === "183284612573822976") winRate = .9;
+    if (msg.author.id === "183284612573822976") winRate = .1;
     // nick
-    if (msg.author.id === "577483620244258825") winRate = 1;
+    if (msg.author.id === "577483620244258825") winRate = 0;
 
     const win = Math.random() > winRate;
 
@@ -52,7 +52,7 @@ export = new Command(async (bot, msg, args) => {
     msg.channel.send(message);
     return RETURN_CODES.OK;
 }, {
-    "name": "Gamble",
-    "usage": "gamble <amount>",
-    "info": "Gamble"
+    name: "Gamble",
+    usage: "gamble <amount>",
+    info: "Gamble"
 });

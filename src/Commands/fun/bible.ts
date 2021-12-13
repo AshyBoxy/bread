@@ -3,7 +3,7 @@ import Command from "../../Classes/Command";
 import STRINGS from "../../strings";
 import { getRandomVerse, getVerse } from "../../Utils/bible";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const embed = new MessageEmbed();
     if (args[0] && args[1]) {
         const verse = await getVerse(args[0], parseInt(args[1]), args[2] || "1-5");
@@ -18,9 +18,9 @@ export = new Command(async (bot, msg, args) => {
             .setDescription(verse.verse.verses.join("\n"))
             .setFooter(verse.verse.copyright);
     }
-    msg.channel.send(embed);
+    msg.channel.send({ embeds: [embed] });
 }, {
-    "name": STRINGS.COMMANDS.FUN.BIBLE.DATA.NAME,
-    "usage": STRINGS.COMMANDS.FUN.BIBLE.DATA.USAGE,
-    "info": STRINGS.COMMANDS.FUN.BIBLE.DATA.INFO
+    name: STRINGS.COMMANDS.FUN.BIBLE.DATA.NAME,
+    usage: STRINGS.COMMANDS.FUN.BIBLE.DATA.USAGE,
+    info: STRINGS.COMMANDS.FUN.BIBLE.DATA.INFO
 });

@@ -2,7 +2,7 @@ import Command from "../../Classes/Command";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 import { getCoins } from "../../defaults";
 
-export = new Command(async (bot, msg) => {
+export default new Command(async (bot, msg) => {
     const user = msg.author;
 
     let coins = await bot.coins.get(user.id);
@@ -21,7 +21,7 @@ export = new Command(async (bot, msg) => {
 
     return RETURN_CODES.OK;
 }, {
-    "name": "Hourly",
-    "usage": "hourly",
-    "info": "Hourly"
+    name: "Hourly",
+    usage: "hourly",
+    info: "Hourly"
 });

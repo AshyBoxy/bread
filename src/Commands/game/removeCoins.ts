@@ -3,7 +3,7 @@ import { COMMANDS, RETURN_CODES } from "../../constants";
 import { mentions } from "../../Utils";
 import { getCoins } from "../../defaults";
 
-export = new Command(async (bot, msg, args) => {
+export default new Command(async (bot, msg, args) => {
     const user = mentions.userFromMention(bot, args[0]);
     const amount = parseInt(args[1]);
     if (!user || !amount) return RETURN_CODES.BAD_USAGE;
@@ -21,8 +21,8 @@ export = new Command(async (bot, msg, args) => {
 
     return RETURN_CODES.OK;
 }, {
-    "name": "RemoveCoins",
-    "usage": "removecoins <@user> <amount>",
-    "info": "RemoveCoins",
-    "permission": "MANAGE_GUILD"
+    name: "RemoveCoins",
+    usage: "removecoins <@user> <amount>",
+    info: "RemoveCoins",
+    permission: "MANAGE_GUILD"
 });

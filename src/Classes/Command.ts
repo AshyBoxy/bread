@@ -19,8 +19,9 @@ class Command implements IGeneralCommandData {
     permission: PermissionResolvable;
 
     module: IModule = {
-        "name": "None",
-        "path": "none"
+        name: "None",
+        path: "none",
+        description: "Not part of a module???"
     };
 
     constructor(execute: run, data: IGeneralCommandData) {

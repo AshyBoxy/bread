@@ -30,7 +30,9 @@ class CustomClient extends Client {
         this.modules = modules;
         this.guildConfigs = guildConfigs;
         this.coins = coins;
+    }
 
+    async setup(): Promise<void> {
         const warnings: string[] = [];
         const infos: string[] = [];
 
@@ -39,7 +41,7 @@ class CustomClient extends Client {
         const eventFiles = readdirSync(this.config.eventsPath).filter((x: string) => x.endsWith(".js"));
 
         for (let i = 0; i < eventFiles.length; i++) {
-            const event: EventHandler<keyof ClientEvents> = require(path.join(this.config.eventsPath, eventFiles[i]));
+            const event: EventHandler<keyof ClientEvents> = (await import(path.join(this.config.eventsPath, eventFiles[i]))).default;
             this.on(event.name, event.execute(this));
             events.push(event.name);
         }
@@ -52,7 +54,7 @@ class CustomClient extends Client {
 
             const commands: string[] = [];
             for (let x = 0; x < cmdFiles.length; x++) {
-                const cmd: Command = require(path.join(this.config.commandsPath, this.modules[i].path, cmdFiles[x]));
+                const cmd: Command = (await import(path.join(this.config.commandsPath, this.modules[i].path, cmdFiles[x]))).default;
                 if (!cmd?.run || !cmd?.name) {
                     warnings.push(STRINGS.CLASSES.CLIENT.WARNINGS.COMMAND(cmdFiles[x].split(".js")[0], this.modules[i].name));
                     continue;
