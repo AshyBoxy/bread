@@ -1,6 +1,9 @@
 import { AllowedImageFormat, AllowedImageSize, PresenceData, RoleData } from "discord.js";
 import STRINGS from "./strings";
 
+// replace namespace hell with something else
+// also consider consolidating recurring constants
+
 // command return codes
 export const RETURN_CODES = {
     OK: 0,

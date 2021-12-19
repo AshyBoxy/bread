@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import STRINGS from "../strings";
 import { randomInt } from "./randomNumber";
 
 const react = (msg: Message): void => {
@@ -10,30 +11,39 @@ const react = (msg: Message): void => {
 
     const shiny = roll(4096);
     const nonShiny = roll(3);
-    const golden = roll(8192);
+    const golden = roll(1);
 
     if (golden) {
-        msg.react("919761954980106260");
-        msg.channel.send(`${msg.author} got golden bread!`);
+        msgReact(msg, STRINGS.UTILS.REACT.EMOJI.GOLDEN);
+        if (msg.author.id === msg.client.user?.id) return;
+        msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.GOLDEN(msg.author.id));
     }
     else if (shiny) {
         const square = roll(16);
         if (square) {
-            msg.react("718797512449851502");
-            msg.channel.send(`${msg.author} got square shiny bread!`);
+            msgReact(msg, STRINGS.UTILS.REACT.EMOJI.SQUARE_SHINY);
+            msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.SQUARE_SHINY(msg.author.id));
         }
         else {
-            msg.react("718797512336474132");
-            msg.channel.send(`${msg.author} got shiny bread!`);
+            msgReact(msg, STRINGS.UTILS.REACT.EMOJI.SHINY);
+            msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.SHINY(msg.author.id));
         }
     }
-    else if (nonShiny) msg.react("🍞");
+    else if (nonShiny) msgReact(msg, STRINGS.UTILS.REACT.EMOJI.NON_SHINY);
 };
 
 const roll = (odds: number, count?: number): boolean => {
     count = count || 1;
     for (let i = 0; i < count; i++) if (randomInt(1, odds) === 1) return true;
     return false;
+};
+
+const msgReact = (msg: Message, reaction: string): void => {
+    msg.react(reaction).catch((error) => {
+        if (typeof error.message !== "string") return;
+        if (error.message === "Reaction blocked") msg.reply(STRINGS.UTILS.REACT.BLOCKED);
+        else msg.reply(STRINGS.UTILS.REACT.ERROR(error));
+    });
 };
 
 export default react;

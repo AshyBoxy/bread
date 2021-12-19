@@ -43,9 +43,10 @@ export default new EventHandler("messageCreate", (bot) => async (msg): Promise<v
     if (!cmd.startsWith(prefix)) return;
 
     let command;
+    cmd = cmd.slice(prefix.length);
 
-    if (bot.commands.get(cmd.slice(prefix.length))) command = bot.commands.get(cmd.slice(prefix.length));
-    else if (bot.commands.get(<string>bot.aliases.get(cmd.slice(prefix.length)))) command = bot.commands.get(<string>bot.aliases.get(cmd.slice(prefix.length)));
+    if (bot.commands.get(cmd)) command = bot.commands.get(cmd);
+    else if (bot.commands.get(<string>bot.aliases.get(cmd))) command = bot.commands.get(<string>bot.aliases.get(cmd));
 
     if (command) utils.discord.runCommand(bot, msg, args, command);
 });

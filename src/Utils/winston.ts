@@ -36,7 +36,7 @@ class DiscordWebhook extends Transport {
         super(opts);
     }
 
-    log(info: IWinstonTransportInfo, callback: () => void): void {
+    async log(info: IWinstonTransportInfo, callback: () => void): Promise<void> {
         setImmediate(() => {
             this.emit("logged", info);
         });
@@ -44,7 +44,7 @@ class DiscordWebhook extends Transport {
         const { level, message, timestamp, ...rest } = info;
 
         // eslint-disable-next-line no-console
-        webhook.send(`>>> ${timestamp} - ${level}: ${message} (${JSON.stringify(rest)})`).catch(console.error);
+        await webhook.send(`>>> ${timestamp} - ${level}: ${message} (${JSON.stringify(rest)})`).catch(console.error);
 
         callback();
     }

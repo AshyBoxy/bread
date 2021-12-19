@@ -2,6 +2,7 @@ import EventHandler from "../Classes/EventHandler";
 import { randomInt } from "../Utils/randomNumber";
 
 export default new EventHandler("interactionCreate", () => (int): void => {
+    // temporary so not in STRINGS
     if (int.isButton() || int.isCommand()) {
         const replies = [
             "aaaaa", "AHHHHHH", "ARGHHHHHH", "AAAAAAAAAAAA"

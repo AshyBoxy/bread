@@ -4,7 +4,11 @@ import { COMMANDS } from "../../constants";
 import STRINGS from "../../strings";
 
 export default new Command((bot, msg) => {
-    const user = msg.author;
+    // swap this out with better logic
+    // check for mention in args[0]
+    // if none, check if message is a reply
+    // if not, message author
+    const user = msg.mentions.users.first() || msg.author;
 
     const embed = new MessageEmbed()
         .setColor(COMMANDS.FUN.USERINFO.embedColor)

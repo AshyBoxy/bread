@@ -19,6 +19,21 @@ export interface UTILS {
         BAD_USAGE: (prefix: string, usage: string) => string;
         ERROR: string;
     };
+    REACT: {
+        EMOJI: {
+            NON_SHINY: string;
+            SHINY: string;
+            SQUARE_SHINY: string;
+            GOLDEN: string;
+        };
+        SPECIAL_MESSAGES: {
+            SHINY: (authorId: string) => string;
+            SQUARE_SHINY: (authorId: string) => string;
+            GOLDEN: (authorId: string) => string;
+        };
+        BLOCKED: string;
+        ERROR: (error: { message: string; }) => string;
+    };
 }
 
 export interface MAIN {
