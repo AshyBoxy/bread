@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node --experimental-specifier-resolution=node dist/index.js",
-    "dev": "npm run build ; npm run start",
-    "build": "rm -rf dist/ ; tsc"
+    "dev": "npm run build ; npm run fix-files ; npm run start",
+    "build": "rm -rf dist/ ; tsc",
+    "fix-files": "cp -v src/framework/package.json dist/framework ; mv dist/framework/src dist/framework/dist"
   },
   "keywords": [],
   "author": "AshyBoxy",

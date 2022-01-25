@@ -1,6 +1,6 @@
 import { GuildMember, Message, PermissionResolvable } from "discord.js";
-import Client from "../Classes/Client";
-import Command from "../Classes/Command";
+import { Client } from "../framework";
+import { Command } from "../framework";
 import { RETURN_CODES } from "../constants";
 import STRINGS from "../strings";
 

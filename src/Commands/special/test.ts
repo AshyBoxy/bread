@@ -1,5 +1,5 @@
 // import { MessageActionRow, MessageButton } from "discord.js";
-import Command from "../../Classes/Command";
+import { Command } from "../../framework";
 import { discord } from "../../Utils";
 
 export default new Command((bot, msg, args) => {

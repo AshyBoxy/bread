@@ -1,4 +1,4 @@
-import GuildCommand from "../../Classes/GuildCommand";
+import { GuildCommand } from "../../framework";
 import { COMMANDS } from "../../constants";
 import STRINGS from "../../strings";
 

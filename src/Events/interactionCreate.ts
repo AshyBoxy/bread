@@ -1,4 +1,4 @@
-import EventHandler from "../Classes/EventHandler";
+import { EventHandler } from "../framework";
 import { randomInt } from "../Utils/randomNumber";
 
 export default new EventHandler("interactionCreate", () => (int): void => {

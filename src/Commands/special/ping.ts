@@ -1,4 +1,4 @@
-import Command from "../../Classes/Command.js";
+import { Command } from "../../framework";
 
 export default new Command((bot, msg) => {
     msg.channel.send(`Pong! ${Math.floor(bot.ws.ping)}ms`);

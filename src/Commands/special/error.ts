@@ -1,4 +1,4 @@
-import GuildCommand from "../../Classes/GuildCommand";
+import { GuildCommand } from "../../framework";
 
 export default new GuildCommand(async () => {
     const errorFunc = (): Promise<unknown> => new Promise((res, rej) => { rej("test"); });

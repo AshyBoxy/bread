@@ -1,4 +1,4 @@
-import Command from "../../Classes/Command";
+import { Command } from "../../framework";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 import STRINGS from "../../strings";
 

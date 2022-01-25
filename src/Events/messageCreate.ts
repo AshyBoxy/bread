@@ -1,5 +1,5 @@
-import EventHandler from "../Classes/EventHandler";
-import IGuildConfig from "../Interfaces/GuildConfig";
+import { EventHandler } from "../framework";
+import { IGuildConfig } from "../framework";
 import STRINGS from "../strings";
 import * as utils from "../Utils";
 

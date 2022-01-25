@@ -1,4 +1,4 @@
-import Message from "../Interfaces/Message";
+import { Message } from "../framework";
 import STRINGS from "../strings";
 import { randomInt } from "./randomNumber";
 

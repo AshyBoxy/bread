@@ -1,6 +1,6 @@
 import * as path from "path";
-import Client from "./Classes/Client";
-import LevelDB from "./Classes/LevelDB";
+import { Client } from "./framework";
+import { LevelDB } from "./framework";
 import modules from "./Commands/modules";
 import config from "./config";
 import STRINGS from "./strings";

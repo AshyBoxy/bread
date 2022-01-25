@@ -1,4 +1,4 @@
-import IModule from "../Interfaces/Module";
+import { IModule } from "../framework";
 
 const modules: IModule[] = [
     {

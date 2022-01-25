@@ -1,5 +1,5 @@
 import * as path from "path";
-import IConfig from "./Interfaces/Config";
+import { IConfig } from "./framework";
 
 const config: IConfig = {
     prefix: "!",

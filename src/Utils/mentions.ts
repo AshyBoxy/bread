@@ -1,5 +1,5 @@
 import { Guild, GuildMember, User } from "discord.js";
-import Client from "../Classes/Client";
+import { Client } from "../framework";
 
 function memberFromMention(guild: Guild | null, arg: string): GuildMember | null {
     const id = idFromMention(arg);

@@ -1,4 +1,4 @@
-import EventHandler from "../Classes/EventHandler";
+import { EventHandler } from "../framework";
 import { discord } from "../Utils";
 
 export default new EventHandler("messageReactionAdd", (bot) => async (reaction): Promise<void> => {

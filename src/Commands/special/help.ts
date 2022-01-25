@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../../Classes/Command";
+import { Command } from "../../framework";
 import { COMMANDS } from "../../constants";
-import IGuildConfig from "../../Interfaces/GuildConfig";
+import { IGuildConfig } from "../../framework";
 
 export default new Command(async (bot, msg, args) => {
     const input = args.join(" ").toLowerCase();

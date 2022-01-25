@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../../Classes/Command";
+import { Command } from "../../framework";
 import { COMMANDS } from "../../constants";
 import STRINGS from "../../strings";
 

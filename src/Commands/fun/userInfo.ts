@@ -1,4 +1,4 @@
-import Command from "../../Classes/Command";
+import { Command } from "../../framework";
 import { MessageEmbed } from "discord.js";
 import { COMMANDS } from "../../constants";
 import STRINGS from "../../strings";

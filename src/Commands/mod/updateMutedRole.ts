@@ -1,4 +1,4 @@
-import GuildCommand from "../../Classes/GuildCommand";
+import { GuildCommand } from "../../framework";
 import { COMMANDS, RETURN_CODES } from "../../constants";
 
 export default new GuildCommand(async (bot, msg) => {

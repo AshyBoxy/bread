@@ -1,4 +1,4 @@
-import EventHandler from "../Classes/EventHandler";
+import { EventHandler } from "../framework";
 import STRINGS from "../strings";
 
 export default new EventHandler("ready", (bot) => (): void => {
