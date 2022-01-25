@@ -1,3 +1,4 @@
+import { PermissionResolvable } from "discord.js";
 import IInteractionArgument from "./InteractionArgument";
 import IModule from "./Module";
 
@@ -18,4 +19,7 @@ export default interface ICommandData {
         required?: IInteractionArgument[];
         optional?: IInteractionArgument[];
     };
+
+    permission?: PermissionResolvable;
+    botPermission?: PermissionResolvable;
 }

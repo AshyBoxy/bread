@@ -9,7 +9,7 @@ const bot = new Client(
     config,
     modules,
     new LevelDB(path.join(config.dbBasePath, "guildConfigs.db")),
-    new LevelDB(path.join(config.dbBasePath, "coins.db"))
+    new LevelDB(path.join(config.dbBasePath, "userData.db"))
 );
 
 await bot.setup();

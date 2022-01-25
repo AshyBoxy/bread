@@ -18,11 +18,12 @@ export default new Command((bot, msg) => {
             size: COMMANDS.FUN.USERINFO.size
         }))
         .setTitle(user.username);
-    const member = msg.guild?.members.cache.get(user.id);
 
+    const member = msg.guild?.members.cache.get(user.id);
     if (member) embed.setTitle(member.displayName)
         .setColor(member.displayColor)
-        .addField(STRINGS.COMMANDS.FUN.USER_INFO.JOINED, member.joinedAt?.toUTCString() || "");
+        .addField(STRINGS.COMMANDS.FUN.USER_INFO.JOINED_GUILD_TITLE, member.joinedAt?.toUTCString() || "")
+        .addField(STRINGS.COMMANDS.FUN.USER_INFO.JOINED_DISCORD_TITLE, user.createdAt.toUTCString());
 
     msg.channel.send({ embeds: [embed] });
 }, {

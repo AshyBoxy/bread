@@ -17,6 +17,7 @@ class Command implements IGeneralCommandData {
     guildOnly: boolean;
     dmOnly: boolean;
     permission: PermissionResolvable;
+    botPermission: PermissionResolvable;
 
     module: IModule = {
         name: "None",
@@ -35,6 +36,7 @@ class Command implements IGeneralCommandData {
         this.guildOnly = data.guildOnly || false;
         this.dmOnly = data.dmOnly || false;
         this.permission = data.permission || [];
+        this.botPermission = data.botPermission || [];
     }
 }
 

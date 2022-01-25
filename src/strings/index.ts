@@ -19,6 +19,7 @@ const _STRINGS: IStrings = {
             GUILD_ONLY: "This command can only be used in a server!",
             DM_ONLY: "This command can only be used in DMs!",
             BAD_PERMISSIONS: "You don't have the required permissions to use this command!",
+            BOT_PERMISSIONS: "I don't have the required permissions to use this command!",
             BAD_USAGE: (prefix, usage): string => `Usage: ${prefix}${usage}`,
             ERROR: "There was an error processing that command! Please try again."
         },
@@ -90,7 +91,8 @@ const _STRINGS: IStrings = {
                     USAGE: "userinfo [@user]",
                     INFO: "Shows a user's information"
                 },
-                JOINED: "Joined Server At"
+                JOINED_GUILD_TITLE: "Joined Server At",
+                JOINED_DISCORD_TITLE: "Joined Discord At"
             }
         },
         MOD: {

@@ -11,10 +11,11 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
         return msg.channel.send(STRINGS.UTILS.DISCORD.GUILD_ONLY);
     if (command.dmOnly && msg.channel.type !== "DM")
         return msg.channel.send(STRINGS.UTILS.DISCORD.DM_ONLY);
-    if (
-        command.permission && msg.channel.type !== "DM" &&
-        !checkPermission(command.permission, <GuildMember>msg.member)
-    ) return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_PERMISSIONS);
+    if (command.permission && msg.channel.type !== "DM")
+        if (!checkPermission(command.permission, <GuildMember>msg.member))
+            return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_PERMISSIONS);
+        else if (!checkPermission(command.botPermission, <GuildMember>msg.guild?.me))
+            return msg.channel.send(STRINGS.UTILS.DISCORD.BOT_PERMISSIONS);
 
     const cmdRun = await (<Promise<number | void>>command.run(bot, msg, args))?.catch?.(() => 2);
 

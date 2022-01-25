@@ -28,7 +28,7 @@ export namespace COMMANDS {
     export namespace CONFIG {
         // prefix command
         export namespace PREFIX {
-            export const maxLength = 100;
+            export const maxLength = 10;
         }
     }
 
@@ -127,12 +127,3 @@ export namespace COMMANDS {
 
 // utils
 export namespace UTILS { }
-
-// defaults
-export namespace DEFAULTS {
-    // coins
-    export namespace COINS {
-        export const coins = 100;
-        export const hourlyCooldown = 0;
-    }
-}

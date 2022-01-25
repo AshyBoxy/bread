@@ -16,6 +16,7 @@ export interface UTILS {
         GUILD_ONLY: string;
         DM_ONLY: string;
         BAD_PERMISSIONS: string;
+        BOT_PERMISSIONS: string;
         BAD_USAGE: (prefix: string, usage: string) => string;
         ERROR: string;
     };
@@ -53,6 +54,8 @@ export interface EVENTS {
     };
 }
 
+// make all commands have a data thing without explicitly adding it
+// using Record or something
 export interface COMMANDS {
     CONFIG: {
         PREFIX: {
@@ -86,7 +89,9 @@ export interface COMMANDS {
                 USAGE: string;
                 INFO: string;
             };
-            JOINED: string;
+            JOINED_GUILD_TITLE: string;
+            // JOINED_GUILD_BODY
+            JOINED_DISCORD_TITLE: string;
         };
     };
     MOD: {

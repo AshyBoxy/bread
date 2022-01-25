@@ -18,11 +18,6 @@ const modules: IModule[] = [
         name: "Configuration",
         path: "config",
         description: "Configuration Commands"
-    },
-    {
-        name: "Games",
-        path: "game",
-        description: "Games"
     }
 ];
 

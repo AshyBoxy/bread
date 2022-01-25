@@ -1,7 +1,7 @@
 import { Client, ClientEvents, Collection } from "discord.js";
 import { readdirSync } from "fs";
 import * as path from "path";
-import ICoins from "../Interfaces/Coins";
+import IUserData from "../Interfaces/UserData";
 import IConfig from "../Interfaces/Config";
 import IGuildConfig from "../Interfaces/GuildConfig";
 import IModule from "../Interfaces/Module";
@@ -10,6 +10,7 @@ import { logger } from "../Utils";
 import Command from "./Command";
 import EventHandler from "./EventHandler";
 import LevelDB from "./LevelDB";
+import { Snowflake } from "discord-api-types";
 
 class CustomClient extends Client {
     config: IConfig;
@@ -18,18 +19,18 @@ class CustomClient extends Client {
     aliases: Collection<string, string> = new Collection();
 
     guildConfigs: LevelDB<IGuildConfig>;
-    coins: LevelDB<ICoins>;
+    userData: LevelDB<IUserData>;
 
     logger = logger;
 
     constructor(
-        config: IConfig, modules: IModule[], guildConfigs: LevelDB<IGuildConfig>, coins: LevelDB<ICoins>
+        config: IConfig, modules: IModule[], guildConfigs: LevelDB<IGuildConfig>, userData: LevelDB<IUserData>
     ) {
         super(config);
         this.config = config;
         this.modules = modules;
         this.guildConfigs = guildConfigs;
-        this.coins = coins;
+        this.userData = userData;
     }
 
     async setup(): Promise<void> {
@@ -74,10 +75,26 @@ class CustomClient extends Client {
         if (warnings.length > 0) this.logger.warn(warnings.join("\n"));
     }
 
+    async getUserData(id: Snowflake): Promise<IUserData> {
+        let userData = await this.userData.get(id);
+        const dataCopy: IUserData = JSON.parse(JSON.stringify(userData || {}));
+        userData = defaultData();
+        Object.assign(userData, dataCopy);
+
+        return userData;
+    }
+
+    async setUserData(id: Snowflake, data: IUserData): Promise<void> {
+        await this.userData.set(id, data);
+        return;
+    }
+
+
+
     async shutdown(reason: string): Promise<void> {
         this.logger.info(STRINGS.MAIN.SHUTTING_DOWN(reason));
         await Promise.all([
-            this.guildConfigs.db.close(), this.coins.db.close()
+            this.guildConfigs.db.close(), this.userData.db.close()
         ]);
         this.destroy();
         process.exit();
@@ -85,3 +102,15 @@ class CustomClient extends Client {
 }
 
 export default CustomClient;
+
+function defaultData(): IUserData {
+    return {
+        test: "default",
+        breadCollection: {
+            nonShiny: 0,
+            shiny: 0,
+            squareShiny: 0,
+            golden: 0
+        }
+    };
+}
