@@ -8,6 +8,5 @@ export default new EventHandler("interactionCreate", () => (int): void => {
             "aaaaa", "AHHHHHH", "ARGHHHHHH", "AAAAAAAAAAAA"
         ];
         int.reply(replies[randomInt(0, replies.length - 1)]);
-
     }
 });

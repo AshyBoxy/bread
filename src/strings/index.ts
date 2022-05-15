@@ -104,6 +104,15 @@ const _STRINGS: IStrings = {
                 },
                 DELETED_MESSAGES: (deletedCount): string => `Deleted ${deletedCount} messages!`
             }
+        },
+        SPECIAL: {
+            STATUS: {
+                DATA: {
+                    NAME: "Status",
+                    INFO: "Shows the bot's general status",
+                    USAGE: "status"
+                }
+            }
         }
     }
 };

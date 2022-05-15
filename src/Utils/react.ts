@@ -11,23 +11,23 @@ const react = async (msg: Message): Promise<void> => {
     const userData = await msg.client.getUserData(msg.author.id);
 
     const shiny = roll(4096);
-    // const nonShiny = roll(3);
+    const nonShiny = roll(3);
     const golden = roll(8192);
 
-    const nonShiny = randomInt(1, 3);
-    switch (nonShiny) {
-        case 1:
-            msgReact(msg, "1️⃣");
-            break;
-        case 2:
-            msgReact(msg, "2️⃣");
-            break;
-        case 3:
-            msgReact(msg, "3️⃣");
-            break;
-        default:
-            msgReact(msg, "❓");
-    }
+    // const nonShiny = randomInt(1, 3);
+    // switch (nonShiny) {
+    //     case 1:
+    //         msgReact(msg, "1️⃣");
+    //         break;
+    //     case 2:
+    //         msgReact(msg, "2️⃣");
+    //         break;
+    //     case 3:
+    //         msgReact(msg, "3️⃣");
+    //         break;
+    //     default:
+    //         msgReact(msg, "❓");
+    // }
 
 
     if (golden) {
@@ -49,7 +49,7 @@ const react = async (msg: Message): Promise<void> => {
             msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.SHINY(msg.author.id));
         }
     }
-    else if (nonShiny === 1) {
+    else if (nonShiny) {
         userData.breadCollection.nonShiny = (userData.breadCollection.nonShiny || 0) + 1;
         msgReact(msg, STRINGS.UTILS.REACT.EMOJI.NON_SHINY);
     }

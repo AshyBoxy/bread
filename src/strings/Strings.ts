@@ -104,6 +104,15 @@ export interface COMMANDS {
             DELETED_MESSAGES: (deletedCount: number) => string;
         };
     };
+    SPECIAL: {
+        STATUS: {
+            DATA: {
+                NAME: string;
+                USAGE: string;
+                INFO: string;
+            };
+        };
+    }
 }
 
 export interface IStrings {

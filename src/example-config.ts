@@ -1,6 +1,8 @@
 import * as path from "path";
 import { IConfig } from "./framework";
 
+// note: this config is incomplete, update later
+
 const config: IConfig = {
     prefix: "!",
     token: "definitely.areal.token",
