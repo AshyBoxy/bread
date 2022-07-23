@@ -1,4 +1,4 @@
-import { GuildMember, Message, PermissionResolvable } from "discord.js";
+import { ChannelType, GuildMember, Message, PermissionResolvable } from "discord.js";
 import { Client } from "../framework";
 import { Command } from "../framework";
 import { RETURN_CODES } from "../constants";
@@ -9,12 +9,12 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
         return msg.channel.send(STRINGS.UTILS.DISCORD.DISABLED);
     if (command.guildOnly && !msg.guild)
         return msg.channel.send(STRINGS.UTILS.DISCORD.GUILD_ONLY);
-    if (command.dmOnly && msg.channel.type !== "DM")
+    if (command.dmOnly && msg.channel.type !== ChannelType.DM)
         return msg.channel.send(STRINGS.UTILS.DISCORD.DM_ONLY);
-    if (command.permission && msg.channel.type !== "DM")
+    if (command.permission && msg.channel.type !== ChannelType.DM)
         if (!checkPermission(command.permission, <GuildMember>msg.member))
             return msg.channel.send(STRINGS.UTILS.DISCORD.BAD_PERMISSIONS);
-        else if (!checkPermission(command.botPermission, <GuildMember>msg.guild?.me))
+        else if (!checkPermission(command.botPermission, <GuildMember>msg.guild?.members.me))
             return msg.channel.send(STRINGS.UTILS.DISCORD.BOT_PERMISSIONS);
 
     const cmdRun = await (<Promise<number | void>>command.run(bot, msg, args))?.catch?.(() => 2);

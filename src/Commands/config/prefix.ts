@@ -23,5 +23,5 @@ export default new Command(async (bot, msg, args) => {
     guildOnly: true,
     usage: STRINGS.COMMANDS.CONFIG.PREFIX.DATA.USAGE,
     info: STRINGS.COMMANDS.CONFIG.PREFIX.DATA.INFO,
-    permission: ["MANAGE_GUILD"]
+    permission: ["ManageGuild"]
 });

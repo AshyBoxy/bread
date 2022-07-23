@@ -9,6 +9,6 @@ export default new Command(async (bot, msg) => {
     usage: "collection [@user]",
     aliases: ["c"],
     botPermission: [
-        "SEND_MESSAGES", "ATTACH_FILES"
+        "SendMessages", "AttachFiles"
     ]
 });

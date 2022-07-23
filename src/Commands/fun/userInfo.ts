@@ -1,6 +1,6 @@
-import { Command } from "../../framework";
-import { MessageEmbed } from "discord.js";
+import MessageEmbed from "../../Classes/MessageEmbed";
 import { COMMANDS } from "../../constants";
+import { Command } from "../../framework";
 import STRINGS from "../../strings";
 
 export default new Command((bot, msg) => {
@@ -13,8 +13,7 @@ export default new Command((bot, msg) => {
     const embed = new MessageEmbed()
         .setColor(COMMANDS.FUN.USERINFO.embedColor)
         .setThumbnail(user.displayAvatarURL({
-            dynamic: COMMANDS.FUN.USERINFO.dynamic,
-            format: COMMANDS.FUN.USERINFO.format,
+            extension: COMMANDS.FUN.USERINFO.extension,
             size: COMMANDS.FUN.USERINFO.size
         }))
         .setTitle(user.username);

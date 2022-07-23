@@ -1,25 +1,40 @@
+import { GatewayIntentBits, Partials } from "discord.js";
 import * as path from "path";
+import * as CONSTANTS from "./constants";
 import { IConfig } from "./framework";
 
-// note: this config is incomplete, update later
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const config: IConfig = {
-    prefix: "!",
-    token: "definitely.areal.token",
+    prefix: "b!",
+    token: "bot token",
     winston: {
         webhook: {
-            id: "69",
-            token: "420"
+            id: "webhook id",
+            token: "webhook token"
         }
     },
-    intents: [
-        "GUILDS",
-        "GUILD_MESSAGES",
-        "GUILD_MESSAGE_REACTIONS"
-    ],
     eventsPath: path.join(__dirname, "Events"),
     commandsPath: path.join(__dirname, "Commands"),
-    dbBasePath: `${path.join(__dirname, "..", "data")}`
+    partials: [
+        Partials.Reaction,
+        Partials.Message
+    ],
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.MessageContent // priviledged
+        // GatewayIntentBits.GuildMembers, // priviledged
+        // GatewayIntentBits.GuildPresences // priviledged
+    ],
+    presence: CONSTANTS.PRESENCE,
+    dbBasePath: `${path.join(__dirname, "..", "data")}`,
+    allowedMentions: {
+        parse: ["users"],
+        repliedUser: true
+    }
 };
 
 export default config;

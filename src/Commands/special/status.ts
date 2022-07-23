@@ -1,7 +1,7 @@
-import { MessageEmbed } from "discord.js";
+import * as os from "os";
+import MessageEmbed from "../../Classes/MessageEmbed";
 import { Command } from "../../framework";
 import STRINGS from "../../strings";
-import * as os from "os";
 
 export default new Command((bot, msg) => {
     const embed = new MessageEmbed()
@@ -19,7 +19,7 @@ export default new Command((bot, msg) => {
     name: STRINGS.COMMANDS.SPECIAL.STATUS.DATA.NAME,
     info: STRINGS.COMMANDS.SPECIAL.STATUS.DATA.INFO,
     usage: STRINGS.COMMANDS.SPECIAL.STATUS.DATA.USAGE,
-    botPermission: ["ATTACH_FILES"]
+    botPermission: ["AttachFiles"]
 });
 
 function formatTime(secs: number): string {

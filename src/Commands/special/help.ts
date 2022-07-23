@@ -1,14 +1,13 @@
-import { MessageEmbed } from "discord.js";
-import { Command } from "../../framework";
+import MessageEmbed from "../../Classes/MessageEmbed";
 import { COMMANDS } from "../../constants";
-import { IGuildConfig } from "../../framework";
+import { Command, IGuildConfig } from "../../framework";
 
 export default new Command(async (bot, msg, args) => {
     const input = args.join(" ").toLowerCase();
     const command = bot.commands.get(input) || bot.commands.get(<string>bot.aliases.get(input));
     const module = bot.modules.find((x) => x.name.toLowerCase() === input);
     const embed = new MessageEmbed()
-        .setColor(msg.guild?.me?.displayColor || COMMANDS.SPECIAL.HELP.embedColor);
+        .setColor(msg.guild?.members.me?.displayColor || COMMANDS.SPECIAL.HELP.embedColor);
 
     let config: IGuildConfig | undefined;
     if (msg.guild) config = await bot.guildConfigs.get(msg.guild.id);
@@ -21,14 +20,14 @@ export default new Command(async (bot, msg, args) => {
         embed.setTitle(`${module.name} Help`)
             .setFooter(`Use '${prefix}help <command>' for more info on a command`);
     } else if (command) {
-        embed.setTitle(`${msg.guild?.me?.displayName || bot.user?.username} Help`)
+        embed.setTitle(`${msg.guild?.members.me?.displayName || bot.user?.username} Help`)
             .setDescription(command.name)
             .addField("Info", command.info, true)
             .addField("Usage", `${prefix}${command.usage}`, true);
 
         if (command.aliases[0]) embed.addField("Aliases", command.aliases.join(", "), true);
     } else if (!args[0]) {
-        embed.setTitle(`${msg.guild?.me?.displayName || bot.user?.username} Help`)
+        embed.setTitle(`${msg.guild?.members.me?.displayName || bot.user?.username} Help`)
             .setDescription("Modules")
             .setFooter(`Use '${prefix}help <module>' for more info on a module`);
 

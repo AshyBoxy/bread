@@ -16,5 +16,5 @@ export default new GuildCommand(async (bot, msg, args) => {
     name: STRINGS.COMMANDS.MOD.CLEAR.DATA.NAME,
     info: STRINGS.COMMANDS.MOD.CLEAR.DATA.INFO,
     usage: STRINGS.COMMANDS.MOD.CLEAR.DATA.USAGE,
-    permission: "MANAGE_MESSAGES"
+    permission: "ManageMessages"
 });

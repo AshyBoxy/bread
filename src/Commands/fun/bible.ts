@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import MessageEmbed from "../../Classes/MessageEmbed";
 import { Command } from "../../framework";
 import STRINGS from "../../strings";
 import { getRandomVerse, getVerse } from "../../Utils/bible";

@@ -1,4 +1,5 @@
-import { AllowedImageFormat, AllowedImageSize, PresenceData, RoleData } from "discord.js";
+import { ImageURLOptions } from "@discordjs/rest";
+import { ActivityType, PresenceData, RoleData } from "discord.js";
 import STRINGS from "./strings";
 
 // replace namespace hell with something else
@@ -17,7 +18,7 @@ export const globalEmbedColor = 0xff00ff;
 export const PRESENCE: PresenceData = {
     activities: [{
         name: STRINGS.EVENTS.READY.ACTIVITY_NAME,
-        type: "WATCHING"
+        type: ActivityType.Watching
     }],
     status: "idle"
 };
@@ -72,16 +73,14 @@ export namespace COMMANDS {
     export namespace FUN {
         // avatar command
         export namespace AVATAR {
-            export const dynamic = true;
-            export const format: AllowedImageFormat = "png";
-            export const size: AllowedImageSize = 2048;
+            export const extension: ImageURLOptions["extension"] = "png";
+            export const size: ImageURLOptions["size"] = 2048;
             export const embedColor = globalEmbedColor;
         }
 
         // userinfo command
         export namespace USERINFO {
-            export const dynamic = AVATAR.dynamic;
-            export const format = AVATAR.format;
+            export const extension = AVATAR.extension;
             export const size = AVATAR.size;
             export const embedColor = globalEmbedColor;
         }
