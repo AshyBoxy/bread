@@ -4,8 +4,11 @@
   "description": "Discord Bot",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">19.7.0"
+  },
   "scripts": {
-    "start": "node --experimental-specifier-resolution=node dist/index.js",
+    "start": "node --experimental-loader ./loader.js dist/index.js",
     "dev": "npm run build ; npm run fix-files ; npm run start",
     "build": "rm -rf dist/ ; tsc",
     "fix-files": "cp -v src/framework/package.json dist/framework ; mv dist/framework/src dist/framework/dist",
@@ -15,23 +18,24 @@
   "author": "AshyBoxy",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "discord-api-types": "^0.22.0",
-    "discord.js": "^14.0.3",
-    "leveldown": "^6.0.1",
-    "levelup": "^5.0.1",
-    "node-fetch": "^3.2.6",
+    "@discordjs/rest": "^1.5.0",
+    "discord-api-types": "^0.37.35",
+    "discord.js": "^14.7.1",
+    "leveldown": "^6.1.1",
+    "levelup": "^5.1.1",
+    "node-fetch": "^3.3.0",
+    "resolve": "^1.22.1",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/leveldown": "^4.0.3",
-    "@types/levelup": "^4.3.3",
-    "@types/node": "^18.0.6",
-    "@types/node-fetch": "^2.5.12",
-    "@types/ws": "^7.4.7",
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
-    "@typescript-eslint/parser": "^5.30.7",
-    "eslint": "^7.32.0",
-    "typescript": "^4.7.4"
+    "@types/levelup": "^5.1.2",
+    "@types/node": "^18.14.6",
+    "@types/node-fetch": "^2.6.2",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "eslint": "^8.35.0",
+    "typescript": "^4.9.5"
   }
 }
