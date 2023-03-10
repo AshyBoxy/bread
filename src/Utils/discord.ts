@@ -4,10 +4,6 @@ import { Client, Command, Message } from "../framework";
 import STRINGS from "../strings";
 
 async function runCommand(bot: Client, msg: Message, args: string[], command: Command): Promise<unknown> {
-
-    // if (msg.partial) await msg.fetch();
-    // if (msg.channel.partial) await msg.channel.fetch();
-
     if (command.disabled)
         return msg.channel.send(STRINGS.UTILS.DISCORD.DISABLED);
     if (command.guildOnly && !msg.guild)
