@@ -1,10 +1,13 @@
-import { ChannelType, GuildMember, Message, PermissionResolvable } from "discord.js";
-import { Client } from "../framework";
-import { Command } from "../framework";
+import { ChannelType, GuildMember, PermissionResolvable } from "discord.js";
 import { RETURN_CODES } from "../constants";
+import { Client, Command, Message } from "../framework";
 import STRINGS from "../strings";
 
 async function runCommand(bot: Client, msg: Message, args: string[], command: Command): Promise<unknown> {
+
+    // if (msg.partial) await msg.fetch();
+    // if (msg.channel.partial) await msg.channel.fetch();
+
     if (command.disabled)
         return msg.channel.send(STRINGS.UTILS.DISCORD.DISABLED);
     if (command.guildOnly && !msg.guild)

@@ -1,6 +1,6 @@
 import { InteractionType } from "discord.js";
 import { EventHandler } from "../framework";
-import { randomInt } from "../Utils/randomNumber";
+import { randomInt } from "../Utils";
 
 export default new EventHandler("interactionCreate", () => (int): void => {
     // temporary so not in STRINGS
