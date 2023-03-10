@@ -1,18 +1,18 @@
 import { Guild, GuildMember, User } from "discord.js";
 import { Client } from "../framework";
 
-function memberFromMention(guild: Guild | null, arg: string): GuildMember | null {
+async function memberFromMention(guild: Guild | null, arg: string): Promise<GuildMember | null> {
     const id = idFromMention(arg);
     if (!id || !guild) return null;
-    const member = guild.members.cache.get(id);
+    const member = await guild.members.fetch(id);
     if (!member) return null;
     return member;
 }
 
-function userFromMention(bot: Client, arg: string): User | null {
+async function userFromMention(bot: Client, arg: string): Promise<User | null> {
     const id = idFromMention(arg);
     if (!id) return null;
-    const user = bot.users.cache.get(id);
+    const user = await bot.users.fetch(id);
     if (!user) return null;
     return user;
 }
