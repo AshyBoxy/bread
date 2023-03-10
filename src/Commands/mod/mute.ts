@@ -4,7 +4,7 @@ import { COMMANDS, RETURN_CODES } from "../../constants";
 export default new GuildCommand(async (bot, msg, args) => {
     const member = msg.mentions.members?.first();
     const num = parseInt(args[1]) || COMMANDS.MOD.MUTE.defaultLength;
-    const reason = args.slice(2) === [] ? null : args.slice(2).join(" ");
+    const reason = args.slice(2).length < 1 ? null : args.slice(2).join(" ");
 
     if (!msg.mentions.members?.first() || !num || !member) return RETURN_CODES.BAD_USAGE;
     if (member.user.bot) return msg.channel.send(`${member} is a bot`), RETURN_CODES.OK;
