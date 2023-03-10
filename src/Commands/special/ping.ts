@@ -16,6 +16,7 @@ export default new Command((bot, msg) => {
     guildOnly: false,
     dmOnly: false,
     permission: [],
+    botPermission: [],
 
     interactionOnly: false,
     messageOnly: false,
