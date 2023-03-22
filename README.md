@@ -17,3 +17,5 @@
 
 - Replace the current strings system with a better library than this mess
 - Stop using namespaces for constants - the orignal reason was easier type management. Research
+
+- Singletons for logger and such?
