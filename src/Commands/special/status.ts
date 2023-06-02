@@ -23,12 +23,12 @@ export default new Command(async (bot, msg) => {
 
     const breadCommit = (await exec("git rev-parse HEAD")).stdout.slice(0, 10);
     const breadDirty =
-        typeof (await exec("git diff-index --quiet HEAD --").catch(() => true)) !== "string" ||
-        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"').catch(() => true)) !== "string";
+        typeof (await exec("git diff-index --quiet HEAD --").catch(() => ({ stdout: false }))).stdout !== "string" ||
+        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"').catch(() => ({ stdout: false }))).stdout !== "string";
     const frameworkCommit = (await exec("git rev-parse HEAD", { cwd: path.join(process.cwd(), "src/framework") })).stdout.slice(0, 10);
     const frameworkDirty =
-        typeof (await exec("git diff-index --quiet HEAD --", { cwd: path.join(process.cwd(), "src/framework") }).catch(() => true)) !== "string" ||
-        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: path.join(process.cwd(), "src/framework") }).catch(() => true)) !== "string";
+        typeof (await exec("git diff-index --quiet HEAD --", { cwd: path.join(process.cwd(), "src/framework") }).catch(() => ({ stdout: false }))).stdout !== "string" ||
+        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: path.join(process.cwd(), "src/framework") }).catch(() => ({ stdout: false }))).stdout !== "string";
 
     try {
         embed.addField("Bread version", `${breadCommit}${breadDirty ? " [dirty]" : ""}`, true)
