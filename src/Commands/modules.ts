@@ -5,8 +5,7 @@ const modules: IModule[] = [
         name: "Special",
         path: "special",
         description: "Special Commands"
-    },
-    {
+    }, {
         name: "Fun",
         path: "fun",
         description: "Fun Commands"

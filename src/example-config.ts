@@ -8,7 +8,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const config: IConfig = {
     prefix: "b!",
     token: "bot token",
-    winston: {
+    logging: {
         webhook: {
             id: "webhook id",
             token: "webhook token"

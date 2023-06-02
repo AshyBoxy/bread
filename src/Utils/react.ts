@@ -1,6 +1,6 @@
 import { Message } from "../framework";
 import STRINGS from "../strings";
-import { randomInt } from "./randomNumber";
+import { randomInt } from ".";
 
 const react = async (msg: Message): Promise<void> => {
     if (
@@ -57,8 +57,7 @@ const react = async (msg: Message): Promise<void> => {
     msg.client.setUserData(msg.author.id, userData);
 };
 
-const roll = (odds: number, count?: number): boolean => {
-    count = count || 1;
+const roll = (odds: number, count = 1): boolean => {
     for (let i = 0; i < count; i++) if (randomInt(1, odds) === 1) return true;
     return false;
 };

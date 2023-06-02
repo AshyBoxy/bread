@@ -16,7 +16,10 @@ async function runCommand(bot: Client, msg: Message, args: string[], command: Co
         else if (!checkPermission(command.botPermission, <GuildMember>msg.guild?.members.me))
             return msg.channel.send(STRINGS.UTILS.DISCORD.BOT_PERMISSIONS);
 
-    const cmdRun = await (<Promise<number | void>>command.run(bot, msg, args))?.catch?.(() => 2);
+    const cmdRun = await (<Promise<number | void>>command.run(bot, msg, args))?.catch?.((err) => {
+        bot.logger.error(`Error running ${command.name}: ${err || "empty error"}`);
+        return RETURN_CODES.ERROR;
+    });
 
     switch (cmdRun) {
         case RETURN_CODES.BAD_USAGE:

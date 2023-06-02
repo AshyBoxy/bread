@@ -2,6 +2,14 @@ import fetch from "node-fetch";
 import IBibleBook from "../Interfaces/BibleBook";
 import IBibleVerse from "../Interfaces/BibleVerse";
 
+/*
+    TODO:
+    Either fix this or remove it
+    This is a horrible buggy mess.
+
+    Neither of these functions are type safe
+*/
+
 const books: IBibleBook[] = [
     {
         name: "Genesis",

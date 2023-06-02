@@ -2,8 +2,13 @@ import * as os from "os";
 import MessageEmbed from "../../Classes/MessageEmbed";
 import { Command } from "../../framework";
 import STRINGS from "../../strings";
+import * as discord from "discord.js";
+import * as childProcess from "node:child_process";
+import { promisify } from "node:util";
+import path from "path";
+const exec = promisify(childProcess.exec);
 
-export default new Command((bot, msg) => {
+export default new Command(async (bot, msg) => {
     const embed = new MessageEmbed()
         .addField("System Memory Usage",
             `${Math.round((os.totalmem() - os.freemem()) / 1024 / 1024)}/${Math.round(os.totalmem() / 1024 / 1024)}MB`, true)
@@ -13,6 +18,24 @@ export default new Command((bot, msg) => {
 
     if (bot.uptime)
         embed.addField("Bot Uptime", formatTime(bot.uptime / 1000), true);
+
+    embed.addField("discord.js version", discord.version, true);
+
+    const breadCommit = (await exec("git rev-parse HEAD")).stdout.slice(0, 10);
+    const breadDirty =
+        typeof (await exec("git diff-index --quiet HEAD --").catch(() => true)) !== "string" ||
+        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"').catch(() => true)) !== "string";
+    const frameworkCommit = (await exec("git rev-parse HEAD", { cwd: path.join(process.cwd(), "src/framework") })).stdout.slice(0, 10);
+    const frameworkDirty =
+        typeof (await exec("git diff-index --quiet HEAD --", { cwd: path.join(process.cwd(), "src/framework") }).catch(() => true)) !== "string" ||
+        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: path.join(process.cwd(), "src/framework") }).catch(() => true)) !== "string";
+
+    try {
+        embed.addField("Bread version", `${breadCommit}${breadDirty ? " [dirty]" : ""}`, true)
+            .addField("Bread Framework version", `${frameworkCommit}${frameworkDirty ? " [dirty]" : ""}`, true);
+    } catch (error) {
+        bot.logger.error(`error in git embed fields: ${error}`);
+    }
 
     msg.channel.send({ embeds: [embed] });
 }, {
@@ -24,19 +47,21 @@ export default new Command((bot, msg) => {
 
 function formatTime(secs: number): string {
     let time = "";
-    const { hours, minutes, seconds } = secondsToMinutesHoursSeconds(secs);
-    if (hours > 0) time += `${hours} hour${hours === 1 ? "" : "s"} `;
-    if (minutes > 0 || hours > 0) time += `${minutes} minute${minutes === 1 ? "" : "s"} `;
-    if (seconds > 0 || minutes > 0 || hours > 0) time += `${seconds} second${seconds === 1 ? "" : "s"} `;
+    const { days, hours, minutes, seconds } = secondsToMinutesHoursSeconds(secs);
+    if (days > 0) time += `${days} day${days === 1 ? "" : "s"} `;
+    if (hours > 0 || days > 0) time += `${hours} hour${hours === 1 ? "" : "s"} `;
+    if (minutes > 0 || hours > 0 || days > 0) time += `${minutes} minute${minutes === 1 ? "" : "s"} `;
+    if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) time += `${seconds} second${seconds === 1 ? "" : "s"} `;
 
     time = time.trim();
 
     return time;
 }
 
-function secondsToMinutesHoursSeconds(seconds: number): { hours: number, minutes: number, seconds: number; } {
+function secondsToMinutesHoursSeconds(seconds: number): { days: number, hours: number, minutes: number, seconds: number; } {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
-    return { hours, minutes: minutes % 60, seconds: Math.floor(seconds % 60) };
+    return { days, hours: hours % 24, minutes: minutes % 60, seconds: Math.floor(seconds % 60) };
 }
