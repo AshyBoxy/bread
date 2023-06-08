@@ -1,10 +1,9 @@
-import MessageEmbed from "../../Classes/MessageEmbed";
-import { Command } from "../../framework";
+import { Command, BreadEmbed } from "../../framework";
 import STRINGS from "../../strings";
 import { getRandomVerse, getVerse } from "../../Utils/bible";
 
 export default new Command(async (bot, msg, args) => {
-    const embed = new MessageEmbed();
+    const embed = new BreadEmbed();
     if (args[0] && args[1]) {
         const verse = await getVerse(args[0], parseInt(args[1]), args[2] || "1-5");
 

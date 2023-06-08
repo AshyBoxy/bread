@@ -1,6 +1,5 @@
 import * as os from "os";
-import MessageEmbed from "../../Classes/MessageEmbed";
-import { Command } from "../../framework";
+import { Command, BreadEmbed } from "../../framework";
 import STRINGS from "../../strings";
 import * as discord from "discord.js";
 import * as childProcess from "node:child_process";
@@ -9,7 +8,7 @@ import path from "path";
 const exec = promisify(childProcess.exec);
 
 export default new Command(async (bot, msg) => {
-    const embed = new MessageEmbed()
+    const embed = new BreadEmbed()
         .addField("System Memory Usage",
             `${Math.round((os.totalmem() - os.freemem()) / 1024 / 1024)}/${Math.round(os.totalmem() / 1024 / 1024)}MB`, true)
         .addField("Bot Used Memory",

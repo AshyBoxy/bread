@@ -1,6 +1,7 @@
-import { GuildCommand } from "../../framework";
-import { COMMANDS, RETURN_CODES } from "../../constants";
+import { GuildCommand, constants } from "../../framework";
+import { COMMANDS } from "../../constants";
 import { ChannelType } from "discord.js";
+const { RETURN_CODES } = constants;
 
 export default new GuildCommand(async (bot, msg) => {
     let role = (await msg.guild.roles.fetch()).find((x) => x.name === COMMANDS.MOD.UPDATEMUTEDROLE.mutedRole);

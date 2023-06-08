@@ -1,8 +1,7 @@
 import { readFileSync } from "fs";
 import path from "path";
-import MessageEmbed from "../../Classes/MessageEmbed";
 import { globalEmbedColor } from "../../constants";
-import { Command } from "../../framework";
+import { Command, BreadEmbed } from "../../framework";
 import { randomInt } from "../../Utils";
 
 
@@ -11,7 +10,7 @@ export default new Command(async (bot, msg) => {
 
     const wikiResult = await (await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${breads[randomInt(0, breads.length - 1)]}`)).json();
 
-    const embed = new MessageEmbed()
+    const embed = new BreadEmbed()
         .setThumbnail(wikiResult.originalimage.source)
         .setTitle(wikiResult.title)
         .setDescription(wikiResult.extract)

@@ -24,8 +24,7 @@
     "leveldown": "^6.1.1",
     "levelup": "^5.1.1",
     "node-fetch": "^3.3.0",
-    "resolve": "^1.22.1",
-    "winston": "^3.3.3"
+    "resolve": "^1.22.1"
   },
   "devDependencies": {
     "@types/leveldown": "^4.0.3",

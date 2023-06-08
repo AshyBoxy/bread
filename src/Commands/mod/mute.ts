@@ -1,5 +1,6 @@
-import { GuildCommand } from "../../framework";
-import { COMMANDS, RETURN_CODES } from "../../constants";
+import { GuildCommand, constants } from "../../framework";
+import { COMMANDS } from "../../constants";
+const { RETURN_CODES } = constants;
 
 export default new GuildCommand(async (bot, msg, args) => {
     const member = msg.mentions.members?.first();
@@ -13,9 +14,7 @@ export default new GuildCommand(async (bot, msg, args) => {
     const role = msg.guild.roles.cache.find((x) => x.name === COMMANDS.MOD.MUTE.mutedRole);
     if (!role) return msg.channel.send("Could not find a Muted role!"), RETURN_CODES.OK;
 
-    try {
-        await member.roles.add(role, reason || undefined);
-    } catch { return RETURN_CODES.ERROR; }
+    try { await member.roles.add(role, reason || undefined); } catch { return RETURN_CODES.ERROR; }
 
     msg.channel.send(`Muted ${member} for ${num} minute${num === 1 ? "" : "s"}`);
 

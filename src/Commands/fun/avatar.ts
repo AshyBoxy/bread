@@ -1,13 +1,12 @@
-import MessageEmbed from "../../Classes/MessageEmbed";
 import { COMMANDS } from "../../constants";
-import { Command } from "../../framework";
+import { Command, BreadEmbed } from "../../framework";
 import STRINGS from "../../strings";
 
 export default new Command((bot, msg) => {
     const user = msg.mentions.users.first() || msg.author;
     const member = msg.guild?.members.cache.get(user.id);
 
-    const embed = new MessageEmbed()
+    const embed = new BreadEmbed()
         .setImage(user.displayAvatarURL({
             extension: COMMANDS.FUN.AVATAR.extension,
             size: COMMANDS.FUN.AVATAR.size

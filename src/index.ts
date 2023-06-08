@@ -5,6 +5,7 @@ import modules from "./Commands/modules";
 import config from "./config";
 import STRINGS from "./strings";
 import { react } from "./Utils";
+import { constants as fConstants } from "./framework";
 
 const bot = new Client(
     config,
@@ -13,13 +14,13 @@ const bot = new Client(
     new BreadDB(path.join(config.dbBasePath, "userData.db")),
     {
         messageCreate: {
-            immediately: [(_bot, msg): number => (react(msg), 0)],
+            immediately: [(_bot, msg): number => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
             beforeCommand: [(_bot, msg, cmd, _args, prefix): number => {
                 if (cmd === "$hi" || cmd === "$hello" || cmd === `${prefix}hi` || cmd === `${prefix}hello`) {
                     msg.channel.send(STRINGS.EVENTS.MESSAGE.HELLO(msg.author.id));
-                    return 1;
+                    return fConstants.HOOK_CODES.STOP;
                 }
-                return 0;
+                return fConstants.HOOK_CODES.CONTINUE;
             }]
         }
     }

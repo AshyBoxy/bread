@@ -1,6 +1,7 @@
-import { Command } from "../../framework";
-import { COMMANDS, RETURN_CODES } from "../../constants";
+import { Command, constants } from "../../framework";
+import { COMMANDS } from "../../constants";
 import STRINGS from "../../strings";
+const { RETURN_CODES } = constants;
 
 export default new Command(async (bot, msg, args) => {
     if (!msg.guild) return RETURN_CODES.ERROR;

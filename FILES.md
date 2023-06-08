@@ -9,11 +9,8 @@
 - Utils
     - index.ts - barrel file
     - bible.ts - bread only
-    - discord.ts - should be moved to framework
     - mentions.ts - should be moved to framework
-    - randomNumber.ts - unsure, review later
     - react.ts - bread only
-    - winston.ts - deprecated
 - /
     - constants.ts - framework specific constants need to be moved
     - example-config.ts - bread only
@@ -26,6 +23,10 @@
 - Interfaces
 - strings
 - Utils
+    - index.ts - barrel file
+    - discord.ts - contains command execution logic
+    - randomNumber.ts - contains a few random number methods
+    - logger.ts - contains a logger implementation
 - /
     - index.ts - barrel file
     - index.d.ts - framework typings declaration

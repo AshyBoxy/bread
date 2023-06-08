@@ -1,6 +1,5 @@
-import MessageEmbed from "../../Classes/MessageEmbed";
 import { COMMANDS } from "../../constants";
-import { Command } from "../../framework";
+import { Command, BreadEmbed } from "../../framework";
 import STRINGS from "../../strings";
 
 export default new Command((bot, msg) => {
@@ -10,7 +9,7 @@ export default new Command((bot, msg) => {
     // if not, message author
     const user = msg.mentions.users.first() || msg.author;
 
-    const embed = new MessageEmbed()
+    const embed = new BreadEmbed()
         .setColor(COMMANDS.FUN.USERINFO.embedColor)
         .setThumbnail(user.displayAvatarURL({
             extension: COMMANDS.FUN.USERINFO.extension,

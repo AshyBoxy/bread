@@ -1,12 +1,11 @@
-import MessageEmbed from "../../Classes/MessageEmbed";
 import { COMMANDS } from "../../constants";
-import { Command, IGuildConfig } from "../../framework";
+import { Command, IGuildConfig, BreadEmbed } from "../../framework";
 
 export default new Command(async (bot, msg, args) => {
     const input = args.join(" ").toLowerCase();
     const command = bot.commands.get(input) || bot.commands.get(<string>bot.aliases.get(input));
     const module = bot.modules.find((x) => x.name.toLowerCase() === input);
-    const embed = new MessageEmbed()
+    const embed = new BreadEmbed()
         .setColor(msg.guild?.members.me?.displayColor || COMMANDS.SPECIAL.HELP.embedColor);
 
     let config: IGuildConfig | undefined;

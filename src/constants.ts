@@ -5,13 +5,6 @@ import STRINGS from "./strings";
 // replace namespace hell with something else
 // also consider consolidating recurring constants
 
-// command return codes
-export const RETURN_CODES = {
-    OK: 0,
-    BAD_USAGE: 1,
-    ERROR: 2
-};
-
 // embed color seems to come up a lot
 export const globalEmbedColor = 0xff00ff;
 
