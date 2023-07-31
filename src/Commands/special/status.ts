@@ -1,5 +1,5 @@
 import * as os from "os";
-import { Command, BreadEmbed } from "../../framework";
+import { Command, BreadEmbed, Strings } from "../../framework";
 import STRINGS from "../../strings";
 import * as discord from "discord.js";
 import * as childProcess from "node:child_process";
@@ -9,16 +9,18 @@ const exec = promisify(childProcess.exec);
 
 export default new Command(async (bot, msg) => {
     const embed = new BreadEmbed()
-        .addField("System Memory Usage",
+        .addField(Strings.getString("bread.commands.status.sysmem"),
             `${Math.round((os.totalmem() - os.freemem()) / 1024 / 1024)}/${Math.round(os.totalmem() / 1024 / 1024)}MB`, true)
-        .addField("Bot Used Memory",
+        .addField(Strings.getString("bread.commands.status.botmem"),
             `${Math.round(process.memoryUsage.rss() / 1024 / 1024)}MB`, true)
-        .addField("System Uptime", formatTime(os.uptime()), true);
+        .addField(Strings.getString("bread.commands.status.sysuptime"), formatTime(os.uptime()), true);
 
     if (bot.uptime)
-        embed.addField("Bot Uptime", formatTime(bot.uptime / 1000), true);
+        embed.addField(Strings.getString("bread.commands.status.botuptime"), formatTime(bot.uptime / 1000), true);
 
-    embed.addField("discord.js version", discord.version, true);
+    embed.addField(Strings.getString("bread.commands.status.djsver"), discord.version, true);
+
+    embed.addField(Strings.getString("bread.commands.status.nodejsver"), process.version, true);
 
     const breadCommit = (await exec("git rev-parse HEAD")).stdout.slice(0, 10);
     const breadDirty =
@@ -30,10 +32,10 @@ export default new Command(async (bot, msg) => {
         typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: path.join(process.cwd(), "src/framework") }).catch(() => ({ stdout: false }))).stdout !== "string";
 
     try {
-        embed.addField("Bread version", `${breadCommit}${breadDirty ? " [dirty]" : ""}`, true)
-            .addField("Bread Framework version", `${frameworkCommit}${frameworkDirty ? " [dirty]" : ""}`, true);
+        embed.addField(Strings.getString("bread.commands.status.breadver"), `${breadCommit}${breadDirty ? " [dirty]" : ""}`, true)
+            .addField(Strings.getString("bread.commands.status.frameworkver"), `${frameworkCommit}${frameworkDirty ? " [dirty]" : ""}`, true);
     } catch (error) {
-        bot.logger.error(`error in git embed fields: ${error}`);
+        bot.logger.error(Strings.getString("bread.commands.status.error", error));
     }
 
     msg.channel.send({ embeds: [embed] });

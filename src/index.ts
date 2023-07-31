@@ -1,5 +1,5 @@
 import * as path from "path";
-import { Client } from "./framework";
+import { Client, Strings } from "./framework";
 import { BreadDB } from "./framework";
 import modules from "./Commands/modules";
 import config from "./config";
@@ -26,6 +26,10 @@ const bot = new Client(
     }
 );
 
+global.bot = bot;
+
+Strings.addSource((await import("./strings/default.json", { assert: { type: "json" } })).default);
+
 await bot.setup();
 
 bot.login(bot.config.token);
@@ -34,11 +38,11 @@ let siginted = false;
 process.on("SIGINT", () => {
     if (siginted) return;
     siginted = true;
-    bot.shutdown(STRINGS.MAIN.SIGINT);
+    bot.shutdown(Strings.getString("bread.main.sigint"));
 });
 let sigtermed = false;
 process.on("SIGTERM", () => {
     if (sigtermed) return;
     sigtermed = true;
-    bot.shutdown(STRINGS.MAIN.SIGTERM);
+    bot.shutdown(Strings.getString("bread.main.sigterm"));
 });

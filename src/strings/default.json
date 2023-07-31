@@ -1,0 +1,13 @@
+{
+    "bread.main.sigint": "Received SIGINT",
+    "bread.main.sigterm": "Received SIGTERM",
+    "bread.commands.status.sysmem": "System Memory Usage",
+    "bread.commands.status.botmem": "Bot Used Memory",
+    "bread.commands.status.sysuptime": "System Uptime",
+    "bread.commands.status.botuptime": "Bot Uptime",
+    "bread.commands.status.djsver": "discord.js version",
+    "bread.commands.status.nodejsver": "Node.js version",
+    "bread.commands.status.breadver": "Bread version",
+    "bread.commands.status.frameworkver": "Bread Framework version",
+    "bread.commands.status.error": "error in git embed fields: {0}"
+}
