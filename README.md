@@ -10,9 +10,6 @@
         - Maybe using the any solution and then having the user pass in their specific type with the custom dbs on?
     - Add dependencies to bread-framework
 
-- Refactor modules to include a file inside that describes them, rather than the top level modules.ts
-    - submodules?
-
 - Implement PartialCustomMessage - maybe a CustomMessageBase/BaseCustomMessage which they will both extend?
 - Implement interactions in bread-framework
         - keeping handling for message commands aswell
@@ -24,3 +21,5 @@
 - Implement the logging system differently?
 
 - Implement custom loader?
+
+- Dynamic command names based on language and they change properly when language sources change at runtime?

@@ -1,12 +1,34 @@
 import { ImageURLOptions } from "@discordjs/rest";
 import { ActivityType, PresenceData, RoleData } from "discord.js";
 import STRINGS from "./strings";
+import Bread from "./Classes/Bread";
+import { msgReact, roll } from "./Utils/react";
+// import { strings } from "./framework";
 
 // replace namespace hell with something else
 // also consider consolidating recurring constants
 
 // embed color seems to come up a lot
 export const globalEmbedColor = 0xff00ff;
+
+// this should absolutely not be in constants
+// maybe treat them more like how commands are? (dynamically loaded)
+const catBread = new Bread("catbread", {
+    emoji: "1148112615747358730"
+}, (msg, userData) => {
+    const c: string = msg.content.toLowerCase();
+    let g: boolean = false;
+    if (c.includes("uwu")) g = g || roll(2);
+    if (c.includes("nya")) g = g || roll(4);
+    if (c.includes("cat")) g = g || roll(100);
+    if (!g) return;
+    userData.breadCollection[catBread.key] = (userData.breadCollection[catBread.key] || 0) + 1;
+    msgReact(msg, catBread.data.emoji);
+    // msg.channel.send(strings.get("bread.breads.catbread.got", msg.author.id));
+});
+
+
+export const Breads: Bread[] = [catBread];
 
 export const PRESENCE: PresenceData = {
     activities: [{
