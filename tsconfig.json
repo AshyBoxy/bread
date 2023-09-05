@@ -4,6 +4,9 @@
         "src/**/*.json",
         "global.d.ts"
     ],
+    "exclude": [
+        "src/framework/loader.js"
+    ],
     "compilerOptions": {
         "outDir": "dist",
         "allowJs": true,

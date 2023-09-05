@@ -6,7 +6,7 @@ const { RETURN_CODES } = constants;
 export default new Command(async (bot, msg, args) => {
     if (!msg.guild) return RETURN_CODES.ERROR;
     if (args.length < 1) return RETURN_CODES.BAD_USAGE;
-    const guildConfig = await bot.guildConfigs.get(msg.guild.id);
+    const guildConfig = await bot.dbs.guildConfigs.get(msg.guild.id);
     if (!guildConfig) return RETURN_CODES.ERROR;
 
     if (args[0].length > COMMANDS.CONFIG.PREFIX.maxLength)
@@ -14,7 +14,7 @@ export default new Command(async (bot, msg, args) => {
             , RETURN_CODES.OK;
     guildConfig.prefix = args[0].toLowerCase();
 
-    await bot.guildConfigs.set(msg.guild.id, guildConfig);
+    await bot.dbs.guildConfigs.set(msg.guild.id, guildConfig);
 
     msg.channel.send(`Set prefix to \`${guildConfig.prefix}\``);
 

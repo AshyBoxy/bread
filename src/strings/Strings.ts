@@ -49,7 +49,6 @@ export interface EVENTS {
         ACTIVITY_NAME: string;
     };
     MESSAGE: {
-        PREFIX: (prefix: string) => string;
         HELLO: (authorId: string) => string;
     };
 }
@@ -112,7 +111,7 @@ export interface COMMANDS {
                 INFO: string;
             };
         };
-    }
+    };
 }
 
 export interface IStrings {

@@ -3,16 +3,28 @@ import STRINGS from "../strings";
 import { randomInt } from ".";
 import { EmojiIdentifierResolvable } from "discord.js";
 import { Breads } from "../constants";
+import IUserData from "../Interfaces/UserData";
+import IDatabase from "../framework/src/Interfaces/Database";
 
 const react = async (msg: Message): Promise<void> => {
-    const userData = await msg.client.getUserData(msg.author.id);
+    // const userData = await msg.client.getUserData(msg.author.id);
+    const userData: IUserData & { breadCollection: Record<string, number | undefined>; } = <never>await (<IDatabase<IUserData>>msg.client.dbs.userData).get(msg.author.id) || {};
+    userData.breadCollection ??= {}; // funny operator
+    if (msg.content.toLowerCase().includes("garlic")) {
+        msg.reply("woah cool you just said the test word in the same code that gives you shiny bread");
+        userData.breadCollection.squareShiny = (userData.breadCollection.squareShiny || 0) + 1;
+        msgReact(msg, STRINGS.UTILS.REACT.EMOJI.SQUARE_SHINY);
+        msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.SQUARE_SHINY(msg.author.id));
+        // msg.client.setUserData(msg.author.id, userData);
+        msg.client.dbs.userData.set(msg.author.id, userData);
+        return;
+    }
 
     if (
         msg.content.toLowerCase().includes("bread") ||
         msg.content.includes("🍞") ||
         msg.content.toLowerCase().includes("bred")
     ) {
-
         const shiny = roll(4096);
         const nonShiny = roll(3);
         const golden = roll(8192);
@@ -56,7 +68,7 @@ const react = async (msg: Message): Promise<void> => {
 
     Breads.forEach((b) => b.run(msg, userData));
 
-    msg.client.setUserData(msg.author.id, userData);
+    msg.client.dbs.userData.set(msg.author.id, userData);
 };
 
 const roll = (odds: number, count = 1): boolean => {

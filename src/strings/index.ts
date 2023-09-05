@@ -50,7 +50,6 @@ const _STRINGS: IStrings = {
             ACTIVITY_NAME: "All Hail Bread 🍞"
         },
         MESSAGE: {
-            PREFIX: (prefix): string => `My prefix is \`${prefix}\``,
             HELLO: (author): string => `Oh Shit! What Up <@${author}>!`
         }
     },

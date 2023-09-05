@@ -1,17 +1,22 @@
 import * as path from "path";
-import { Client, Strings } from "./framework";
+import { Client, IGuildConfig, Strings } from "./framework";
 import { BreadDB } from "./framework";
 import modules from "./Commands/modules";
 import config from "./config";
 import STRINGS from "./strings";
 import { react } from "./Utils";
 import { constants as fConstants } from "./framework";
+import IUserData from "./Interfaces/UserData";
 
 const bot = new Client(
     config,
     modules,
-    new BreadDB(path.join(config.dbBasePath, "guildConfigs.db")),
-    new BreadDB(path.join(config.dbBasePath, "userData.db")),
+    // new BreadDB(path.join(config.dbBasePath, "guildConfigs.db")),
+    // new BreadDB(path.join(config.dbBasePath, "userData.db")),
+    {
+        guildConfigs: new BreadDB<IGuildConfig>(path.join(config.dbBasePath, "guildConfigs.db")),
+        userData: new BreadDB<IUserData>(path.join(config.dbBasePath, "userData.db"))
+    },
     {
         messageCreate: {
             immediately: [(_bot, msg): number => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
@@ -26,7 +31,7 @@ const bot = new Client(
     }
 );
 
-global.bot = bot;
+global.bot = <Client>bot; // only exists for easier debugging(?)
 
 Strings.addSource((await import("./strings/default.json", { assert: { type: "json" } })).default);
 
