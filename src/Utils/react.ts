@@ -10,15 +10,6 @@ const react = async (msg: Message): Promise<void> => {
     // const userData = await msg.client.getUserData(msg.author.id);
     const userData: IUserData & { breadCollection: Record<string, number | undefined>; } = <never>await (<IDatabase<IUserData>>msg.client.dbs.userData).get(msg.author.id) || {};
     userData.breadCollection ??= {}; // funny operator
-    if (msg.content.toLowerCase().includes("garlic")) {
-        msg.reply("woah cool you just said the test word in the same code that gives you shiny bread");
-        userData.breadCollection.squareShiny = (userData.breadCollection.squareShiny || 0) + 1;
-        msgReact(msg, STRINGS.UTILS.REACT.EMOJI.SQUARE_SHINY);
-        msg.channel.send(STRINGS.UTILS.REACT.SPECIAL_MESSAGES.SQUARE_SHINY(msg.author.id));
-        // msg.client.setUserData(msg.author.id, userData);
-        msg.client.dbs.userData.set(msg.author.id, userData);
-        return;
-    }
 
     if (
         msg.content.toLowerCase().includes("bread") ||
