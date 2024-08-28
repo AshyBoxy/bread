@@ -35,7 +35,7 @@ const stringsPath = "./strings/english.json";
 // const stringsPath = "./strings/french.json";
 Strings.addSource({
     name: "bread_strings",
-    data: (await import(stringsPath, { assert: { type: "json" } })).default
+    data: (await import(stringsPath, { with: { type: "json" } })).default
 });
 
 await bot.setup();
