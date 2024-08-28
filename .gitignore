@@ -1,6 +1,7 @@
 node_modules
 dist
 data/*
+!data/bred.txt
 src/config.ts
 !**/.gitinclude
 test.js

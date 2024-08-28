@@ -4,8 +4,35 @@ import STRINGS from "../../strings";
 import * as discord from "discord.js";
 import * as childProcess from "node:child_process";
 import { promisify } from "node:util";
-import path from "path";
 const exec = promisify(childProcess.exec);
+
+async function getGitTag(dir: string): Promise<string | null> {
+    try {
+        const { stdout: tag } = await exec("git describe --tags --exact-match", { cwd: dir });
+        return tag.trim();
+    } catch (e) {
+        return null;
+    }
+}
+async function getGitCommit(dir: string): Promise<string | null> {
+    try {
+        const { stdout: commitHash } = await exec("git rev-parse HEAD", { cwd: dir });
+        return commitHash.slice(0, 10);
+    } catch (e) {
+        return null;
+    }
+}
+const getGitTagOrCommit = async (dir: string): Promise<string | null> => await getGitTag(dir) || await getGitCommit(dir);
+
+async function getGitDirty(dir: string): Promise<boolean> {
+    try {
+        await exec("git diff-index --quiet HEAD --", { cwd: dir });
+        await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: dir });
+        return false;
+    } catch (error) {
+        return true;
+    }
+}
 
 export default new Command(async (bot, msg) => {
     const embed = new BreadEmbed()
@@ -22,14 +49,10 @@ export default new Command(async (bot, msg) => {
 
     embed.addField(Strings.getString("bread.commands.status.nodejsver"), process.version, true);
 
-    const breadCommit = (await exec("git rev-parse HEAD")).stdout.slice(0, 10);
-    const breadDirty =
-        typeof (await exec("git diff-index --quiet HEAD --").catch(() => ({ stdout: false }))).stdout !== "string" ||
-        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"').catch(() => ({ stdout: false }))).stdout !== "string";
-    const frameworkCommit = (await exec("git rev-parse HEAD", { cwd: path.join(process.cwd(), "src/framework") })).stdout.slice(0, 10);
-    const frameworkDirty =
-        typeof (await exec("git diff-index --quiet HEAD --", { cwd: path.join(process.cwd(), "src/framework") }).catch(() => ({ stdout: false }))).stdout !== "string" ||
-        typeof (await exec('test -z "$(git ls-files --others --exclude-standard)"', { cwd: path.join(process.cwd(), "src/framework") }).catch(() => ({ stdout: false }))).stdout !== "string";
+    const breadCommit = await getGitTagOrCommit(".") || "unknown";
+    const breadDirty = await getGitDirty(".");
+    const frameworkCommit = await getGitTagOrCommit("./src/framework") || "unknown";
+    const frameworkDirty = await getGitDirty("./src/framework");
 
     try {
         embed.addField(Strings.getString("bread.commands.status.breadver"), `${breadCommit}${breadDirty ? " [dirty]" : ""}`, true)

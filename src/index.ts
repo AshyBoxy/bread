@@ -2,7 +2,7 @@ import * as path from "path";
 import { Client, IGuildConfig, Strings } from "./framework";
 import { BreadDB } from "./framework";
 import modules from "./Commands/modules";
-import config from "./config";
+import config, { dbBasePath } from "./config";
 import STRINGS from "./strings";
 import { react } from "./Utils";
 import { constants as fConstants } from "./framework";
@@ -10,17 +10,15 @@ import IUserData from "./Interfaces/UserData";
 
 const bot = new Client(
     config,
-    modules,
-    // new BreadDB(path.join(config.dbBasePath, "guildConfigs.db")),
-    // new BreadDB(path.join(config.dbBasePath, "userData.db")),
     {
-        guildConfigs: new BreadDB<IGuildConfig>(path.join(config.dbBasePath, "guildConfigs.db")),
-        userData: new BreadDB<IUserData>(path.join(config.dbBasePath, "userData.db"))
+        guildConfigs: new BreadDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db")),
+        userData: new BreadDB<IUserData>(path.join(dbBasePath, "userData.db"))
     },
+    modules,
     {
         messageCreate: {
-            immediately: [(_bot, msg): number => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
-            beforeCommand: [(_bot, msg, cmd, _args, prefix): number => {
+            immediately: [(_bot, msg): fConstants.HOOK_CODES => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
+            beforeCommand: [(_bot, msg, cmd, _args, prefix): fConstants.HOOK_CODES => {
                 if (cmd === "$hi" || cmd === "$hello" || cmd === `${prefix}hi` || cmd === `${prefix}hello`) {
                     msg.channel.send(STRINGS.EVENTS.MESSAGE.HELLO(msg.author.id));
                     return fConstants.HOOK_CODES.STOP;
@@ -31,13 +29,31 @@ const bot = new Client(
     }
 );
 
-global.bot = <Client>bot; // only exists for easier debugging(?)
+global.bot = <Client>bot; // only exists for easier debugging(?) i forgor
 
-Strings.addSource((await import("./strings/default.json", { assert: { type: "json" } })).default);
+const stringsPath = "./strings/english.json";
+// const stringsPath = "./strings/french.json";
+Strings.addSource({
+    name: "bread_strings",
+    data: (await import(stringsPath, { assert: { type: "json" } })).default
+});
 
 await bot.setup();
 
-bot.login(bot.config.token);
+const a = process.argv.slice(2);
+if (a.indexOf("--updateCommands") > -1) {
+    if (a.indexOf("--commandDev") > -1) await
+        // eslint-disable-next-line array-bracket-newline
+        bot.publishCommands([
+            "682621051733409824"//, "917167922353422437"
+            // eslint-disable-next-line array-bracket-newline
+        ]);
+    else
+        bot.publishCommands();
+
+    await bot.shutdown("only updating commands");
+}
+else bot.login(bot.config.token);
 
 let siginted = false;
 process.on("SIGINT", () => {
@@ -51,3 +67,11 @@ process.on("SIGTERM", () => {
     sigtermed = true;
     bot.shutdown(Strings.getString("bread.main.sigterm"));
 });
+// let errored = true;
+// process.on("uncaughtException", async (err, origin) => {
+//     bot.logger.error(`${origin}: \`\`\`js\n${err}\`\`\``);
+//     if (errored) return;
+//     errored = true;
+//     await bot.shutdown("Errored");
+//     process.exit(1);
+// });

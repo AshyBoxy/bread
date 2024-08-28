@@ -1,10 +1,10 @@
-import { Command, newstrings } from "../../framework";
+import { Command, strings } from "../../framework";
 
 export default new Command((bot, msg, args) => {
 
-    const strings: string[] = [];
-    for (const arg of args) strings.push(newstrings.getString(arg));
-    msg.channel.send(strings.map((x, i) => `${i}: \`${x}\``).join("\n"));
+    const s: string[] = [];
+    for (const arg of args) s.push(strings.getString(arg));
+    msg.channel.send(s.map((x, i) => `${i}: \`${x}\``).join("\n"));
 
 }, {
     name: "GetString",

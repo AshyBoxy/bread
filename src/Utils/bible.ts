@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import IBibleBook from "../Interfaces/BibleBook";
 import IBibleVerse from "../Interfaces/BibleVerse";
 

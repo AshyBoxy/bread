@@ -30,11 +30,12 @@ const config: IConfig = {
         // GatewayIntentBits.GuildPresences // priviledged
     ],
     presence: CONSTANTS.PRESENCE,
-    dbBasePath: `${path.join(__dirname, "..", "data")}`,
     allowedMentions: {
         parse: ["users"],
         repliedUser: true
     }
 };
+
+export const dbBasePath = `${path.join(__dirname, "..", "data")}`;
 
 export default config;
