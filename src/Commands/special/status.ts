@@ -1,4 +1,4 @@
-import * as os from "os";
+import * as os from "node:os";
 import { Command, BreadEmbed, Strings } from "../../framework";
 import STRINGS from "../../strings";
 import * as discord from "discord.js";
@@ -47,7 +47,8 @@ export default new Command(async (bot, msg) => {
 
     embed.addField(Strings.getString("bread.commands.status.djsver"), discord.version, true);
 
-    embed.addField(Strings.getString("bread.commands.status.nodejsver"), process.version, true);
+    if (typeof Bun === "object") embed.addField(Strings.getString("bread.commands.status.bunver"), Bun.version, true);
+    else embed.addField(Strings.getString("bread.commands.status.nodejsver"), process.version, true);
 
     const breadCommit = await getGitTagOrCommit(".") || "unknown";
     const breadDirty = await getGitDirty(".");

@@ -6,6 +6,7 @@
     "bread.commands.status.sysuptime": "Temps de fonctionnement du système",
     "bread.commands.status.botuptime": "Temps de fonctionnement du bot",
     "bread.commands.status.djsver": "Version discord.js",
+    "bread.commands.status.bunver": "Version Bun",
     "bread.commands.status.nodejsver": "Version Node.js",
     "bread.commands.status.breadver": "Version Bread",
     "bread.commands.status.frameworkver": "Version du cadre pour le Bread",

@@ -1,12 +1,10 @@
-import * as path from "path";
-import { Client, IGuildConfig, Strings } from "./framework";
-import { BreadDB } from "./framework";
+import * as path from "node:path";
 import modules from "./Commands/modules";
 import config, { dbBasePath } from "./config";
+import { BreadDB, Client, constants as fConstants, IGuildConfig, Strings } from "./framework";
+import IUserData from "./Interfaces/UserData";
 import STRINGS from "./strings";
 import { react } from "./Utils";
-import { constants as fConstants } from "./framework";
-import IUserData from "./Interfaces/UserData";
 
 const bot = new Client(
     config,

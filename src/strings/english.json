@@ -6,6 +6,7 @@
     "bread.commands.status.sysuptime": "System Uptime",
     "bread.commands.status.botuptime": "Bot Uptime",
     "bread.commands.status.djsver": "discord.js version",
+    "bread.commands.status.bunver": "Bun version",
     "bread.commands.status.nodejsver": "Node.js version",
     "bread.commands.status.breadver": "Bread version",
     "bread.commands.status.frameworkver": "Bread Framework version",
