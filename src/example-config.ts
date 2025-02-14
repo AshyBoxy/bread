@@ -33,7 +33,8 @@ const config: IConfig = {
     allowedMentions: {
         parse: ["users"],
         repliedUser: true
-    }
+    },
+    development: false
 };
 
 export const dbBasePath = `${path.join(__dirname, "..", "data")}`;
