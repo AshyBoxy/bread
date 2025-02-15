@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "bun",
+            "request": "launch",
+            "name": "Debug Bread",
+            "program": "${workspaceFolder}/src/index.ts",
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "watchMode": false,
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": []
+        }
+    ]
+}

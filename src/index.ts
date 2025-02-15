@@ -15,11 +15,30 @@ const bot = new Client(
     modules,
     {
         messageCreate: {
-            immediately: [(_bot, msg): fConstants.HOOK_CODES => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
-            beforeCommand: [(_bot, msg, cmd, _args, prefix): fConstants.HOOK_CODES => {
-                if (cmd === "$hi" || cmd === "$hello" || cmd === `${prefix}hi` || cmd === `${prefix}hello`) {
-                    msg.channel.send(STRINGS.EVENTS.MESSAGE.HELLO(msg.author.id));
-                    return fConstants.HOOK_CODES.STOP;
+            immediately: [(_bot, msg) => (react(msg), fConstants.HOOK_CODES.CONTINUE)],
+            beforeCommand: [
+                (_bot, msg, cmd, _args, prefix) => {
+                    if (cmd === "$hi" || cmd === "$hello" || cmd === `${prefix}hi` || cmd === `${prefix}hello`) {
+                        msg.channel.send(STRINGS.EVENTS.MESSAGE.HELLO(msg.author.id));
+                        return fConstants.HOOK_CODES.STOP;
+                    }
+                    return fConstants.HOOK_CODES.CONTINUE;
+                },
+                (_bot, msg, cmd) => {
+                    if (!_bot.config.development) return fConstants.HOOK_CODES.CONTINUE;
+                    if (cmd === ";test") {
+                        msg.reply("test beforeCommand hook");
+                        return <fConstants.HOOK_CODES>69;
+                        // return fConstants.HOOK_CODES.STOP;
+                    }
+                    return fConstants.HOOK_CODES.CONTINUE;
+                }
+            ],
+            notCommand: [(_bot, msg, cmd) => {
+                if (!_bot.config.development) return fConstants.HOOK_CODES.CONTINUE;
+                if (cmd === ";test2") {
+                    msg.reply("test notCommand hook");
+                    return <fConstants.HOOK_CODES>69;
                 }
                 return fConstants.HOOK_CODES.CONTINUE;
             }]
@@ -31,10 +50,10 @@ global.bot = <Client>bot; // only exists for easier debugging(?) i forgor
 
 const stringsPath = "./strings/english.json";
 // const stringsPath = "./strings/french.json";
-Strings.addSource({
+Strings.addDefaultSource({
     name: "bread_strings",
     data: (await import(stringsPath, { with: { type: "json" } })).default
-});
+}).clearSources();
 
 await bot.setup();
 
@@ -47,7 +66,7 @@ if (a.indexOf("--updateCommands") > -1) {
             // eslint-disable-next-line array-bracket-newline
         ]);
     else
-        bot.publishCommands();
+        await bot.publishCommands();
 
     await bot.shutdown("only updating commands");
 }
