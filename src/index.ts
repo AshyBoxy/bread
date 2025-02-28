@@ -1,7 +1,7 @@
 import * as path from "node:path";
 import modules from "./Commands/modules";
 import config, { dbBasePath } from "./config";
-import { BreadDB, Client, constants as fConstants, IGuildConfig, Strings } from "./framework";
+import { LevelDB, Client, constants as fConstants, IGuildConfig, Strings } from "./framework";
 import IUserData from "./Interfaces/UserData";
 import STRINGS from "./strings";
 import { react } from "./Utils";
@@ -9,8 +9,8 @@ import { react } from "./Utils";
 const bot = new Client(
     config,
     {
-        guildConfigs: new BreadDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db")),
-        userData: new BreadDB<IUserData>(path.join(dbBasePath, "userData.db"))
+        guildConfigs: new LevelDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db")),
+        userData: new LevelDB<IUserData>(path.join(dbBasePath, "userData.db"))
     },
     modules,
     {
