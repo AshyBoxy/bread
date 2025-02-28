@@ -1,5 +1,5 @@
 import { BreadEmbed, Command, strings } from "../../framework";
-import { RETURN_CODES } from "../../framework/src/constants";
+import { RETURN_CODES } from "../../framework";
 
 export default new Command((bot, msg, args) => {
     if (args.length < 1) return RETURN_CODES.BAD_USAGE;
