@@ -1,7 +1,7 @@
-import { ImageURLOptions } from "@discordjs/rest";
+import { ImageExtension, ImageSize } from "@discordjs/rest";
 import { ActivityType, PresenceData, RoleData } from "discord.js";
-import STRINGS from "./strings";
 import Bread from "./Classes/Bread";
+import STRINGS from "./strings";
 import { msgReact, roll } from "./Utils/react";
 // import { strings } from "./framework";
 
@@ -88,8 +88,8 @@ export namespace COMMANDS {
     export namespace FUN {
         // avatar command
         export namespace AVATAR {
-            export const extension: ImageURLOptions["extension"] = "png";
-            export const size: ImageURLOptions["size"] = 2048;
+            export const extension: ImageExtension = "png";
+            export const size: ImageSize = 2048;
             export const embedColor = globalEmbedColor;
         }
 
@@ -138,6 +138,3 @@ export namespace COMMANDS {
         }
     }
 }
-
-// utils
-export namespace UTILS { }

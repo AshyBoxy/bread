@@ -10,5 +10,14 @@
     "bread.commands.status.nodejsver": "Node.js version",
     "bread.commands.status.breadver": "Bread version",
     "bread.commands.status.frameworkver": "Bread Framework version",
-    "bread.commands.status.error": "error in git embed fields: {0}"
+    "bread.commands.status.error": "error in git embed fields: {0}",
+    "bread.commands.test.commandInfo.name": "CommandInfo",
+    "bread.commands.test.commandInfo.info": "Shows internal command information",
+    "bread.commands.test.commandInfo.usage": "commandinfo <command>",
+    "bread.commands.test.commandInfo.nosuchcommand": "Could not find that command",
+    "bread.modules.ai": "AI",
+    "bread.modules.ai.description": "AI Commands",
+    "bread.commands.ai.ask.name": "Ask",
+    "bread.commands.ai.ask.info": "Ask",
+    "bread.commands.ai.ask.usage": "ask [-flags] <message>"
 }

@@ -1,14 +1,12 @@
-import { Message } from "../framework";
-import STRINGS from "../strings";
-import { randomInt } from ".";
 import { EmojiIdentifierResolvable } from "discord.js";
+import { randomInt } from ".";
 import { Breads } from "../constants";
+import { Message } from "../framework";
 import IUserData from "../Interfaces/UserData";
-import IDatabase from "../framework/src/Interfaces/Database";
+import STRINGS from "../strings";
 
 const react = async (msg: Message): Promise<void> => {
-    // const userData = await msg.client.getUserData(msg.author.id);
-    const userData: IUserData & { breadCollection: Record<string, number | undefined>; } = <never>await (<IDatabase<IUserData>>msg.client.dbs.userData).get(msg.author.id) || {};
+    const userData: IUserData = await msg.client.dbs.userData.get(msg.author.id) || {};
     userData.breadCollection ??= {}; // funny operator
 
     if (msg.client.config.development && msg.content.toLowerCase().includes("garlic")) {
@@ -29,22 +27,6 @@ const react = async (msg: Message): Promise<void> => {
         const shiny = roll(4096);
         const nonShiny = roll(3);
         const golden = roll(8192);
-
-        // const nonShiny = randomInt(1, 3);
-        // switch (nonShiny) {
-        //     case 1:
-        //         msgReact(msg, "1️⃣");
-        //         break;
-        //     case 2:
-        //         msgReact(msg, "2️⃣");
-        //         break;
-        //     case 3:
-        //         msgReact(msg, "3️⃣");
-        //         break;
-        //     default:
-        //         msgReact(msg, "❓");
-        // }
-
 
         if (golden) {
             userData.breadCollection.golden = (userData.breadCollection.golden || 0) + 1;
@@ -67,7 +49,7 @@ const react = async (msg: Message): Promise<void> => {
         }
     }
 
-    Breads.forEach((b) => b.run(msg, userData));
+    Breads.forEach((b) => b.run(msg, <never>userData));
 
     msg.client.dbs.userData.set(msg.author.id, userData);
 };
@@ -86,4 +68,5 @@ const msgReact = (msg: Message, reaction: EmojiIdentifierResolvable): void => {
 };
 
 export default react;
-export { roll, msgReact };
+export { msgReact, roll };
+

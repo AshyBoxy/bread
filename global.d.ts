@@ -13,4 +13,15 @@ declare module "./src/framework/src/Classes/Client" {
     }
 }
 
+declare module "./src/framework/src/Interfaces/Config" {
+    interface UserConfig {
+        ai: {
+            token: string,
+            chatUrl: string,
+            settings: Record<string, unknown>,
+            model: string
+        }
+    }
+}
+
 export { };

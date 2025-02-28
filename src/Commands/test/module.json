@@ -1,4 +1,6 @@
 {
     "name": "Test",
-    "description": "test commands"
+    "description": "test commands",
+    "ns": "bread",
+    "id": "test"
 }
