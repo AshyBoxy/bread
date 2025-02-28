@@ -367,6 +367,12 @@ const getRandomVerse = async (): Promise<{
 };
 
 const getVerse = async (book: string, chapter: number, verseNum: number | string): Promise<IBibleVerse> => {
+    // const verse = getVerseLsm(book, chapter, verseNum);
+    const verse = getVerseBapi(book, chapter, verseNum);
+    return verse;
+};
+
+const getVerseLsm = async (book: string, chapter: number, verseNum: number | string): Promise<IBibleVerse> => {
     const rawVerse: {
         message: string;
         copyright: string;
@@ -382,7 +388,35 @@ const getVerse = async (book: string, chapter: number, verseNum: number | string
     };
 
     return verse;
-};
+}
+
+interface BapiResponse {
+    reference: string
+    verses: {
+        book_id: string,
+        book_name: string,
+        chapter: number,
+        verse: number,
+        text: string
+    }[],
+    text: string,
+    translation_id: string,
+    translation_name: string
+    translation_note: string
+}
+
+const getVerseBapi = async (book: string, chapter: number, verseNum: number | string): Promise<IBibleVerse> => {
+    const bibleApi: BapiResponse = await (await fetch(`https://bible-api.com/${book} ${chapter}:${verseNum}?translation=webbe`)).json();
+
+    const verse: IBibleVerse = {
+        verses: bibleApi.verses.map((x) => x.text),
+        message: "",
+        copyright: `${bibleApi.translation_name} © ${bibleApi.translation_note}`
+    }
+
+    return verse;
+}
+
 
 
 
