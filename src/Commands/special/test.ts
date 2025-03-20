@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 import { Command } from "../../framework";
 // import { discord } from "../../Utils";
 
-export default new Command((bot, msg) => {
+export default new Command((bot, ctx) => {
     const row = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(new ButtonBuilder()
             .setCustomId("test")
@@ -10,7 +10,7 @@ export default new Command((bot, msg) => {
             .setStyle(ButtonStyle.Primary)
         );
 
-    msg.channel.send({ content: "test", components: [row] });
+    ctx.send({ content: "test", components: [row] });
 
     // const avatar = bot.commands.get("avatar");
     // if (avatar) discord.runCommand(bot, msg, args, avatar);

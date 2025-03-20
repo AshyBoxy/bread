@@ -11,6 +11,34 @@
             "watchMode": false,
             "internalConsoleOptions": "neverOpen",
             "runtimeArgs": []
+        },
+        {
+            "type": "bun",
+            "request": "launch",
+            "name": "Debug Command Publish",
+            "program": "${workspaceFolder}/src/index.ts",
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "watchMode": false,
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": [],
+            "args": [
+                "--cmdupdate"
+            ]
+        },
+        {
+            "type": "bun",
+            "request": "launch",
+            "name": "Debug Command Publish Dev",
+            "program": "${workspaceFolder}/src/index.ts",
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "watchMode": false,
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": [],
+            "args": [
+                "--cmdupdate --cmddev"
+            ]
         }
     ]
 }

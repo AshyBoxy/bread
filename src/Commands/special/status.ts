@@ -34,7 +34,7 @@ async function getGitDirty(dir: string): Promise<boolean> {
     }
 }
 
-export default new Command(async (bot, msg) => {
+export default new Command(async (bot, ctx) => {
     const embed = new BreadEmbed()
         .addField(Strings.getString("bread.commands.status.sysmem"),
             `${Math.round((os.totalmem() - os.freemem()) / 1024 / 1024)}/${Math.round(os.totalmem() / 1024 / 1024)}MB`, true)
@@ -62,7 +62,7 @@ export default new Command(async (bot, msg) => {
         bot.logger.error(Strings.getString("bread.commands.status.error", error));
     }
 
-    msg.channel.send({ embeds: [embed] });
+    ctx.send({ embeds: [embed] });
 }, {
     name: STRINGS.COMMANDS.SPECIAL.STATUS.DATA.NAME,
     info: STRINGS.COMMANDS.SPECIAL.STATUS.DATA.INFO,

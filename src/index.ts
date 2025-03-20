@@ -1,7 +1,7 @@
 import * as path from "node:path";
 import modules from "./Commands/modules";
 import config, { dbBasePath } from "./config";
-import { LevelDB, Client, constants as fConstants, IGuildConfig, Strings } from "./framework";
+import { Client, constants as fConstants, IGuildConfig, LevelDB, Strings } from "./framework";
 import IUserData from "./Interfaces/UserData";
 import STRINGS from "./strings";
 import { react } from "./Utils";
@@ -11,6 +11,8 @@ const bot = new Client(
     {
         guildConfigs: new LevelDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db")),
         userData: new LevelDB<IUserData>(path.join(dbBasePath, "userData.db"))
+        // guildConfigs: new JsonDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db.json")),
+        // userData: new JsonDB<IUserData>(path.join(dbBasePath, "userData.db.json"))
     },
     modules,
     {
@@ -57,18 +59,21 @@ Strings.addDefaultSource({
 
 await bot.setup();
 
-const a = process.argv.slice(2);
-if (a.indexOf("--updateCommands") > -1) {
-    if (a.indexOf("--commandDev") > -1) await
-        // eslint-disable-next-line array-bracket-newline
-        bot.publishCommands([
-            "682621051733409824"//, "917167922353422437"
-            // eslint-disable-next-line array-bracket-newline
-        ]);
-    else
-        await bot.publishCommands();
+const a = process.argv.slice(2).map((x) => x.toLowerCase());
+if (a.includes("--cmdupdate")) {
+    const user = await bot.getClientUser();
+    bot.logger.info(`Updating slash commands for ${user.username}#${user.discriminator}`);
 
-    await bot.shutdown("only updating commands");
+    const dev = a.includes("--cmddev");
+    const clear = a.includes("--cmdclear");
+
+    let guilds: string[] = [];
+    if (dev) guilds = bot.config.slashCmdGuilds;
+
+    if (clear) await bot.clearCommands(guilds);
+    else await bot.publishCommands(guilds);
+
+    await bot.shutdown("Only updating commands");
 }
 else bot.login(bot.config.token);
 

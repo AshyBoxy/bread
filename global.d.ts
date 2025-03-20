@@ -1,3 +1,4 @@
+import { Snowflake } from "discord.js";
 import { BreadClient } from "./src/framework/src";
 import IDatabase from "./src/framework/src/Interfaces/Database";
 import IUserData from "./src/Interfaces/UserData";
@@ -20,7 +21,8 @@ declare module "./src/framework/src/Interfaces/Config" {
             chatUrl: string,
             settings: Record<string, unknown>,
             model: string
-        }
+        },
+        slashCmdGuilds: Snowflake[]
     }
 }
 

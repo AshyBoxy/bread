@@ -1,10 +1,11 @@
 import { COMMANDS } from "../../constants";
 import { Command, BreadEmbed } from "../../framework";
+import { ArgumentsBuilder } from "../../framework/src/Classes/Arguments";
 import STRINGS from "../../strings";
 
-export default new Command((bot, msg) => {
-    const user = msg.mentions.users.first() || msg.author;
-    const member = msg.guild?.members.cache.get(user.id);
+export default new Command((bot, ctx, args) => {
+    const user = args.getMention() || ctx.user;
+    const member = ctx.guild?.members.cache.get(user.id);
 
     const embed = new BreadEmbed()
         .setImage(user.displayAvatarURL({
@@ -13,10 +14,12 @@ export default new Command((bot, msg) => {
         }))
         .setColor(member ? member.displayColor : COMMANDS.FUN.AVATAR.embedColor);
 
-    msg.channel.send({ embeds: [embed] });
+    ctx.send({ embeds: [embed] });
 }, {
     name: STRINGS.COMMANDS.FUN.AVATAR.DATA.NAME,
     info: STRINGS.COMMANDS.FUN.AVATAR.DATA.INFO,
     usage: STRINGS.COMMANDS.FUN.AVATAR.DATA.USAGE,
-    aliases: STRINGS.COMMANDS.FUN.AVATAR.DATA.ALIASES
+    aliases: STRINGS.COMMANDS.FUN.AVATAR.DATA.ALIASES,
+    args: new ArgumentsBuilder()
+        .addMention()
 });

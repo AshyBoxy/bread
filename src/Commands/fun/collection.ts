@@ -5,9 +5,9 @@ import STRINGS from "../../strings";
 import { mentions } from "../../Utils";
 
 export default new Command(async (bot, msg, args) => {
-    const user = await mentions.userFromMention(bot, args[0]) || msg.mentions.repliedUser || msg.author;
+    const user = await mentions.userFromMention(bot, args[0]) || msg.mentions?.repliedUser || msg.author || msg.user;
     const userData = await bot.dbs.userData.get(user.id);
-    if (!userData?.breadCollection) return void (msg.reply(`${user.id === msg.author.id ? "You" : "They"} have no bread`)); // shouldn't ever happen but you never know
+    if (!userData?.breadCollection) return void (msg.reply(`${user.id === msg.author?.id || msg.user?.id ? "You" : "They"} have no bread`)); // shouldn't ever happen but you never know
 
     let message = `${STRINGS.UTILS.REACT.EMOJI.NON_SHINY}: ${userData.breadCollection.nonShiny || 0}\n`;
     message += `${formatEmoji(STRINGS.UTILS.REACT.EMOJI.SHINY)}: ${userData.breadCollection.shiny || 0}\n`;
@@ -19,7 +19,7 @@ export default new Command(async (bot, msg, args) => {
         if (!b) continue;
         message += `\n${formatEmoji(b.data.emoji)}: ${userData.breadCollection[i]}`;
     }
-    msg.reply(message);
+    msg.send(message);
     // msg.channel.send(`\`\`\`json\n${JSON.stringify(userData, null, 4)}\`\`\``);
 }, {
     name: "Collection",
