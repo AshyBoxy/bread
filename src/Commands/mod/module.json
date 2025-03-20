@@ -1,0 +1,6 @@
+{
+    "name": "Moderation",
+    "description": "Moderation Commands",
+    "ns": "bread",
+    "id": "mod"
+}

@@ -1,5 +1,4 @@
 import * as path from "node:path";
-import modules from "./Commands/modules";
 import config, { dbBasePath } from "./config";
 import { Client, constants as fConstants, IGuildConfig, LevelDB, Strings } from "./framework";
 import IUserData from "./Interfaces/UserData";
@@ -14,7 +13,7 @@ const bot = new Client(
         // guildConfigs: new JsonDB<IGuildConfig>(path.join(dbBasePath, "guildConfigs.db.json")),
         // userData: new JsonDB<IUserData>(path.join(dbBasePath, "userData.db.json"))
     },
-    modules,
+    [],
     {
         messageCreate: {
             immediately: [(_bot, msg) => (react(msg), fConstants.HOOK_CODES.CONTINUE)],

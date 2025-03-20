@@ -1,0 +1,6 @@
+{
+    "name": "Configuration",
+    "description": "Configuration Commands",
+    "ns": "bread",
+    "id": "config"
+}
