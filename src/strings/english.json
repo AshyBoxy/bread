@@ -15,9 +15,7 @@
     "bread.commands.test.commandInfo.info": "Shows internal command information",
     "bread.commands.test.commandInfo.usage": "commandinfo <command>",
     "bread.commands.test.commandInfo.nosuchcommand": "Could not find that command",
-    "bread.modules.ai": "AI",
-    "bread.modules.ai.description": "AI Commands",
-    "bread.commands.ai.ask.name": "Ask",
-    "bread.commands.ai.ask.info": "Ask",
-    "bread.commands.ai.ask.usage": "ask [-flags] <message>"
+    "bread.commands.fun.randomUser.name": "RandomUser",
+    "bread.commands.fun.randomUser.info": "Gets a random user from the server",
+    "bread.commands.fun.randomUser.usage": "randomuser"
 }
