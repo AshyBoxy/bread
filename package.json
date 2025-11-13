@@ -15,32 +15,39 @@
     "fix-files": "cp -v src/framework/package.json dist/framework ; mv dist/framework/src dist/framework/dist",
     "check": "eslint . ; tsc --noEmit",
     "test": "npm run check",
-    "publish-commands": "npm run start -- --updateCommands",
-    "publish-commands-dev": "npm run publish-commands -- --commandDev"
+    "publish-commands": "npm run start -- --cmdupdate",
+    "publish-commands-dev": "npm run publish-commands -- --cmddev"
   },
   "keywords": [],
   "author": "AshyBoxy",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/rest": "^2.4.3",
-    "discord-api-types": "^0.37.119",
-    "discord.js": "^14.18.0",
+    "@discordjs/rest": "^2.6.0",
+    "discord-api-types": "^0.38.22",
+    "discord.js": "^14.22.1",
+    "fast-fuzzy": "^1.12.0",
     "leveldown": "^6.1.1",
     "levelup": "^5.1.1",
     "resolve": "^1.22.10"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.20.0",
-    "@stylistic/eslint-plugin": "^2.10.1",
-    "@types/bun": "^1.2.2",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.34.0",
+    "@stylistic/eslint-plugin": "^5.2.3",
+    "@types/bun": "^1.2.21",
     "@types/leveldown": "^4.0.6",
     "@types/levelup": "^5.1.5",
-    "@types/node": "^22.13.4",
-    "@types/ws": "^8.5.14",
-    "eslint": "^9.20.1",
+    "@types/node": "^24.3.0",
+    "@types/ws": "^8.18.1",
+    "eslint": "^9.34.0",
     "globals": "^15.15.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.0"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
+  },
+  "optionalDependencies": {
+    "keyv": "^5.3.4",
+    "@keyv/sqlite": "^4.0.5",
+    "finnhub": "^2.0.7",
+    "zod": "^4.1.5"
   }
 }
