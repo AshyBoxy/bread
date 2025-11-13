@@ -1,13 +1,13 @@
-import { GuildCommand, constants } from "../../framework";
+import { GuildCommand, Utils, constants } from "../../framework";
 import { COMMANDS } from "../../constants";
 const { RETURN_CODES } = constants;
 
 export default new GuildCommand(async (bot, msg, args) => {
-    const member = msg.mentions.members?.first();
+    const member = await Utils.mentions.memberFromMention(msg.guild, args[0]);
     const num = parseInt(args[1]) || COMMANDS.MOD.MUTE.defaultLength;
     const reason = args.slice(2).length < 1 ? null : args.slice(2).join(" ");
 
-    if (!msg.mentions.members?.first() || !num || !member) return RETURN_CODES.BAD_USAGE;
+    if (!num || !member) return RETURN_CODES.BAD_USAGE;
     if (member.user.bot) return msg.channel.send(`${member} is a bot`), RETURN_CODES.OK;
     const time = num * COMMANDS.MOD.MUTE.lengthMultiplier;
 
