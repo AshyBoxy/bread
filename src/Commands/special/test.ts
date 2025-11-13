@@ -1,23 +1,28 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } from "discord.js";
 import { Command } from "../../framework";
-// import { discord } from "../../Utils";
+import { randomInt } from "../../Utils";
 
-export default new Command((bot, ctx) => {
+export default new Command(function (bot, ctx) {
+    const num = randomInt(1, 1000).toString();
+
     const row = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(new ButtonBuilder()
-            .setCustomId("test")
+            .setCustomId(this.makeComponentId("test", [num]))
             .setLabel("Test")
             .setStyle(ButtonStyle.Primary)
         );
 
-    ctx.send({ content: "test", components: [row] });
-
-    // const avatar = bot.commands.get("avatar");
-    // if (avatar) discord.runCommand(bot, msg, args, avatar);
-    // const userinfo = bot.commands.get("userinfo");
-    // if (userinfo) discord.runCommand(bot, msg, args, userinfo);
+    ctx.send({ content: `test. the random number is ${num}`, components: [row] });
 }, {
     name: "Test",
     info: "Test command",
-    usage: "test ???"
+    usage: "test ???",
+    runComponent: (bot, ctx, id, data) => {
+        if (id !== "test") {
+            ctx.send("Unknown component id");
+            bot.logger.warn(`Got unknown component id in test command: ${id}`);
+            return;
+        }
+        ctx.send({ content: `${ctx.user.displayName} pressed the test button. the random number was ${data[0]}`, flags: MessageFlags.Ephemeral });
+    }
 });

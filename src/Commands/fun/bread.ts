@@ -5,8 +5,7 @@ import { Command, BreadEmbed } from "../../framework";
 import { randomInt } from "../../Utils";
 import { dbBasePath } from "../../config";
 
-
-export default new Command(async (bot, msg) => {
+export default new Command(async (bot, ctx) => {
     const breads = readFileSync(path.join(dbBasePath, "bred.txt")).toString().split(/\r?\n/g).map((x) => x.split("wiki/")[1]).filter((x) => !!x);
 
     const wikiResult = await (await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${breads[randomInt(0, breads.length - 1)]}`)).json();
@@ -17,7 +16,7 @@ export default new Command(async (bot, msg) => {
         .setDescription(wikiResult.extract)
         .setColor(globalEmbedColor);
 
-    msg.channel.send({ embeds: [embed] });
+    ctx.send({ embeds: [embed] });
 }, {
     name: "bread",
     info: "bread",
