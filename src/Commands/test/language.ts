@@ -1,5 +1,4 @@
-import { Command, strings } from "../../framework";
-import { TranslationData } from "../../framework/src/strings";
+import { Command, strings, TranslationData } from "../../framework";
 
 export default new Command(async (bot, msg, args) => {
     const language = args[0]
@@ -11,6 +10,7 @@ export default new Command(async (bot, msg, args) => {
 
     const breadfw: TranslationData = {
         name: `breadfw_${language}`,
+        // TODO: make this work when running from dist
         data: (await import(`../../framework/src/strings/${args[0]}.json`, { with: { type: "json" } })).default
     }
 

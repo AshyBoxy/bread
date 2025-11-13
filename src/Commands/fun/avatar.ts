@@ -1,6 +1,5 @@
 import { COMMANDS } from "../../constants";
-import { Command, BreadEmbed } from "../../framework";
-import { ArgumentsBuilder } from "../../framework/src/Classes/Arguments";
+import { Command, BreadEmbed, ArgumentsBuilder } from "../../framework";
 import STRINGS from "../../strings";
 
 export default new Command((bot, ctx, args) => {
