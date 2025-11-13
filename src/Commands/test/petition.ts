@@ -5,7 +5,7 @@ const topCountryCount = 3;
 const topConstituenciesCount = 3;
 
 export default new Command(async (bot, ctx, args) => {
-    const id = args.getString("petitionid");
+    const id = args.getStringOrThrow("petitionid");
     const population = await getPopulationData();
     const petition = await getPetitionData(id);
     if (!petition) {
