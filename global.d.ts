@@ -15,6 +15,7 @@ declare module "./src/framework/src/Classes/Client" {
 
 declare module "./src/framework/src/Interfaces/Config" {
     interface UserConfig {
+        subsPath?: string;
         slashCmdGuilds: Snowflake[];
     }
 }

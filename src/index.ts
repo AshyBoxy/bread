@@ -1,6 +1,8 @@
+import fs from "node:fs";
 import * as path from "node:path";
 import config, { dbBasePath } from "./config";
 import { Client, constants as fConstants, IGuildConfig, LevelDB, Strings } from "./framework";
+import Sub from "./Interfaces/Sub";
 import IUserData from "./Interfaces/UserData";
 import STRINGS from "./strings";
 import { react } from "./Utils";
@@ -51,10 +53,30 @@ global.bot = <Client>bot; // only exists for easier debugging(?) i forgor
 
 const stringsPath = "./strings/english.json";
 // const stringsPath = "./strings/french.json";
-Strings.addDefaultSource({
+Strings.setupAddDefaultSource({
     name: "bread_strings",
     data: (await import(stringsPath, { with: { type: "json" } })).default
-}).clearSources();
+});
+
+if (bot.config.subsPath) {
+    const subsPath = bot.config.subsPath;
+    const subDirs = fs.readdirSync(subsPath, { recursive: false, encoding: "utf8" }).filter((x) => fs.statSync(path.join(subsPath, x)).isDirectory());
+    for (const subDir of subDirs) {
+        const files = fs.readdirSync(path.join(subsPath, subDir), { recursive: false, encoding: "utf8" });
+        let file: string | null = null;
+        if (files.includes("sub.ts")) file = "sub.ts";
+        else if (files.includes("sub.js")) file = "sub.js";
+        if (!file) {
+            bot.logger.warn(`Sub ${subDir} has no sub file`);
+            continue;
+        };
+
+        const sub: Sub = (await import(path.join(subsPath, subDir, file))).default;
+        if (sub.load) await sub.load(bot);
+    }
+}
+
+Strings.clearSources();
 
 await bot.setup();
 

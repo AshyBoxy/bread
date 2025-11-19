@@ -16,6 +16,7 @@ const config: IConfig = {
     },
     eventsPath: path.join(__dirname, "Events"),
     commandsPath: path.join(__dirname, "Commands"),
+    subsPath: path.join(__dirname, "subs"),
     partials: [
         Partials.Reaction,
         Partials.Message
