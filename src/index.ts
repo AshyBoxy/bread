@@ -74,6 +74,8 @@ if (bot.config.subsPath) {
         const sub: Sub = (await import(path.join(subsPath, subDir, file))).default;
         if (sub.load) await sub.load(bot);
     }
+
+    if (subDirs.length > 0) bot.logger.info(`Loaded subs: ${subDirs.join(", ")}`);
 }
 
 Strings.clearSources();
