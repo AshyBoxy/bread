@@ -24,7 +24,7 @@
   "dependencies": {
     "@discordjs/rest": "^2.6.0",
     "discord-api-types": "^0.38.22",
-    "discord.js": "^14.25.1",
+    "discord.js": "^14.26.4",
     "fast-fuzzy": "^1.12.0",
     "leveldown": "^6.1.1",
     "levelup": "^5.1.1",
@@ -45,9 +45,9 @@
     "typescript-eslint": "^8.59.3"
   },
   "optionalDependencies": {
-    "keyv": "^5.3.4",
     "@keyv/sqlite": "^4.0.5",
     "finnhub": "^2.0.7",
+    "keyv": "^5.3.4",
     "zod": "^4.1.5"
   }
 }
